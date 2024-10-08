@@ -36,6 +36,17 @@ that generates Characters and stores them into a .csv file which can be imported
 ### 💡 Testing Spring Batch by importing a file from Bucket S3
 In order to test the spring batch using S3, ... WIP
 
-### Recommended IntelliJ Plugins
+### 🧩 Recommended IntelliJ Plugins
 1. Lombok
 2. Restful Api Tool
+
+### 🗄️ Reverting Flyway Migrations
+Flyway allows you to reverse applied migrations using the `undo` command. How to Use:
+
+1. **Undo Scripts:**
+    - For each migration (`V__`), create a corresponding undo script (`U__`).
+    - Example: For `V2__create_table.sql`, create `U2__undo_create_table.sql` to reverse it.
+
+2. **Run Undo:**
+   ```bash
+   flyway undo
