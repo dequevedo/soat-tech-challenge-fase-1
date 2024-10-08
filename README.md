@@ -19,7 +19,8 @@ docker compose up -d
 
 ### Connecting to Postgres using PGAdmin
 1. Access PGAdmin on any web browser using the address: http://localhost:5050/
-2. Create a server with the following configuration:
+2. If this is the first time, set a master password, such as: master
+3. Create a server with the following configuration:
 ```
 Name: Any Name
 Host name/address: host.docker.internal
