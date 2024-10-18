@@ -1,4 +1,4 @@
-package com.hexagonalarch.adapters.driver;
+package com.hexagonalarch.adapters.inbound;
 
 import com.hexagonalarch.application.domain.request.CreateProductRequest;
 import com.hexagonalarch.application.domain.response.CreateProductResponse;
