@@ -1,19 +1,16 @@
-package com.hexagonalarch.application.domain.request;
+package com.hexagonalarch.domain.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import jakarta.validation.constraints.NotEmpty;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatRequest {
+public class ChatResponse {
 
-    @NotEmpty(message = "text is mandatory")
     private String text;
 
 }

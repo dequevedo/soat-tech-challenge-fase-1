@@ -1,11 +1,11 @@
 package com.hexagonalarch.application.usecases;
 
-import com.hexagonalarch.application.domain.Product;
-import com.hexagonalarch.application.domain.request.CreateProductRequest;
-import com.hexagonalarch.application.domain.response.CreateProductResponse;
-import com.hexagonalarch.application.domain.response.GetProductResponse;
-import com.hexagonalarch.application.ports.input.ProductService;
-import com.hexagonalarch.application.ports.output.ProductRepository;
+import com.hexagonalarch.domain.Product;
+import com.hexagonalarch.domain.request.CreateProductRequest;
+import com.hexagonalarch.domain.response.CreateProductResponse;
+import com.hexagonalarch.domain.response.GetProductResponse;
+import com.hexagonalarch.application.ports.inbound.ProductService;
+import com.hexagonalarch.application.ports.outbound.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

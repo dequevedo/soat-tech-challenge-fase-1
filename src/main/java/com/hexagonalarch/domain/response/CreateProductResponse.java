@@ -1,6 +1,6 @@
-package com.hexagonalarch.application.domain.response;
+package com.hexagonalarch.domain.response;
 
-import com.hexagonalarch.application.domain.Product;
+import com.hexagonalarch.domain.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

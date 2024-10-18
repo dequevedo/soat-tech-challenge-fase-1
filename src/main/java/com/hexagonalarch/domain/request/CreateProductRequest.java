@@ -1,4 +1,4 @@
-package com.hexagonalarch.application.domain.request;
+package com.hexagonalarch.domain.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

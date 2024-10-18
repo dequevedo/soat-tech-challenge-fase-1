@@ -1,8 +1,8 @@
 package com.hexagonalarch.application.usecases;
 
-import com.hexagonalarch.application.domain.request.ChatRequest;
-import com.hexagonalarch.application.domain.response.ChatResponse;
-import com.hexagonalarch.application.ports.input.ChatService;
+import com.hexagonalarch.domain.request.ChatRequest;
+import com.hexagonalarch.domain.response.ChatResponse;
+import com.hexagonalarch.application.ports.inbound.ChatService;
 import com.hexagonalarch.config.EnvironmentConfig;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;

@@ -1,6 +1,6 @@
-package com.hexagonalarch.application.ports.output;
+package com.hexagonalarch.application.ports.outbound;
 
-import com.hexagonalarch.application.domain.Product;
+import com.hexagonalarch.domain.Product;
 
 import java.util.List;
 import java.util.Optional;

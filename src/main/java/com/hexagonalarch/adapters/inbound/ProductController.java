@@ -1,9 +1,9 @@
 package com.hexagonalarch.adapters.inbound;
 
-import com.hexagonalarch.application.domain.request.CreateProductRequest;
-import com.hexagonalarch.application.domain.response.CreateProductResponse;
-import com.hexagonalarch.application.domain.response.GetProductResponse;
-import com.hexagonalarch.application.ports.input.ProductService;
+import com.hexagonalarch.domain.request.CreateProductRequest;
+import com.hexagonalarch.domain.response.CreateProductResponse;
+import com.hexagonalarch.domain.response.GetProductResponse;
+import com.hexagonalarch.application.ports.inbound.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

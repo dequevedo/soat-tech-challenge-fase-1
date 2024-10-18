@@ -1,7 +1,7 @@
 package com.hexagonalarch.adapters.outbound;
 
-import com.hexagonalarch.application.domain.Product;
-import com.hexagonalarch.application.ports.output.ProductRepository;
+import com.hexagonalarch.domain.Product;
+import com.hexagonalarch.application.ports.outbound.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
