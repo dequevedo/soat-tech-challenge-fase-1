@@ -1,4 +1,4 @@
-package com.hexagonalarch.domain.response;
+package com.hexagonalarch.application.dto.response;
 
 import com.hexagonalarch.domain.Product;
 import lombok.AllArgsConstructor;

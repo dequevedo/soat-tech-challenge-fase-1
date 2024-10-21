@@ -1,7 +1,7 @@
 package com.hexagonalarch.adapters.inbound;
 
-import com.hexagonalarch.domain.request.ChatRequest;
-import com.hexagonalarch.domain.response.ChatResponse;
+import com.hexagonalarch.application.dto.request.ChatRequest;
+import com.hexagonalarch.application.dto.response.ChatResponse;
 import com.hexagonalarch.application.ports.inbound.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

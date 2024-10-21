@@ -1,8 +1,8 @@
 package com.hexagonalarch.adapters.inbound;
 
-import com.hexagonalarch.domain.request.CreateProductRequest;
-import com.hexagonalarch.domain.response.CreateProductResponse;
-import com.hexagonalarch.domain.response.GetProductResponse;
+import com.hexagonalarch.application.dto.request.CreateProductRequest;
+import com.hexagonalarch.application.dto.response.CreateProductResponse;
+import com.hexagonalarch.application.dto.response.GetProductResponse;
 import com.hexagonalarch.application.ports.inbound.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
