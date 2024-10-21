@@ -6,10 +6,9 @@ import com.hexagonalarch.application.dto.response.GetCustomerResponse;
 import com.hexagonalarch.application.ports.inbound.CreateCustomerUseCase;
 import com.hexagonalarch.application.ports.inbound.GetAllCustomersUseCase;
 import com.hexagonalarch.application.ports.inbound.GetCustomerUseCase;
-import com.hexagonalarch.application.ports.outbound.CustomerRepository;
+import com.hexagonalarch.application.ports.outbound.CustomerOutboundPort;
 import com.hexagonalarch.domain.Customer;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +16,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CustomerService implements CreateCustomerUseCase, GetCustomerUseCase, GetAllCustomersUseCase {
 
-    private final CustomerRepository customerRepository;
+    private final CustomerOutboundPort customerRepository;
 
     @Override
     public CreateCustomerResponse createCustomer(CreateCustomerRequest createCustomerRequest) {

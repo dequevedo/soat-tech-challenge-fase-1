@@ -2,17 +2,15 @@ package com.hexagonalarch.adapters.outbound;
 
 import com.hexagonalarch.adapters.outbound.entity.CustomerEntity;
 import com.hexagonalarch.adapters.outbound.mapper.CustomerPersistenceMapper;
-import com.hexagonalarch.application.ports.outbound.CustomerRepository;
+import com.hexagonalarch.application.ports.outbound.CustomerOutboundPort;
 import com.hexagonalarch.domain.Customer;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
 @AllArgsConstructor
-public class JpaCustomerRepositoryAdapter implements CustomerRepository {
+public class JpaCustomerRepositoryAdapter implements CustomerOutboundPort {
 
     private final JpaCustomerRepository jpaRepository;
 

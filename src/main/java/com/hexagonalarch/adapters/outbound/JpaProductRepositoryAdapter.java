@@ -2,17 +2,15 @@ package com.hexagonalarch.adapters.outbound;
 
 import com.hexagonalarch.adapters.outbound.entity.ProductEntity;
 import com.hexagonalarch.adapters.outbound.mapper.ProductPersistenceMapper;
-import com.hexagonalarch.application.ports.outbound.ProductRepository;
+import com.hexagonalarch.application.ports.outbound.ProductOutboundPort;
 import com.hexagonalarch.domain.Product;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
 @AllArgsConstructor
-public class JpaProductRepositoryAdapter implements ProductRepository {
+public class JpaProductRepositoryAdapter implements ProductOutboundPort {
 
     private final JpaProductRepository jpaRepository;
 
