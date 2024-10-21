@@ -1,9 +1,9 @@
 package com.hexagonalarch.adapters.outbound;
 
-import com.hexagonalarch.domain.Product;
+import com.hexagonalarch.adapters.outbound.entity.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface JpaRepositoryAdapter extends JpaRepository<Product, String> {
+public interface JpaCustomerRepository extends JpaRepository<CustomerEntity, Long> {
 }
