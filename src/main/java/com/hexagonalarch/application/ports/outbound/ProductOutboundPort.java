@@ -5,7 +5,7 @@ import com.hexagonalarch.domain.Product;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductRepository {
+public interface ProductOutboundPort {
 
     Product save(Product product);
 
