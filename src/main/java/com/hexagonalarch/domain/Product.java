@@ -1,9 +1,12 @@
 package com.hexagonalarch.domain;
 
 import com.hexagonalarch.domain.enumeration.ProductCategory;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Product {
 
