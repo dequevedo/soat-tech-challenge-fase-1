@@ -3,6 +3,9 @@ package com.hexagonalarch.adapters.inbound;
 import com.hexagonalarch.application.dto.request.CreateProductRequest;
 import com.hexagonalarch.application.dto.response.CreateProductResponse;
 import com.hexagonalarch.application.dto.response.GetProductResponse;
+import com.hexagonalarch.application.ports.inbound.CreateProductUseCase;
+import com.hexagonalarch.application.ports.inbound.GetAllProductsUseCase;
+import com.hexagonalarch.application.ports.inbound.GetProductUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,24 +22,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productService;
+    private final CreateProductUseCase createProductUseCase;
+
+    private final GetProductUseCase getProductUseCase;
+
+    private final GetAllProductsUseCase getAllProductsUseCase;
 
     @PostMapping("/products")
     @ResponseStatus(HttpStatus.CREATED)
     public CreateProductResponse createProduct(@Valid @RequestBody CreateProductRequest product) {
-        return productService.createProduct(product);
+        return createProductUseCase.createProduct(product);
     }
 
     @GetMapping("/products/{id}")
     @ResponseStatus(HttpStatus.OK)
     public GetProductResponse getProductById(@PathVariable Long id) {
-        return productService.getProductById(id);
+        return getProductUseCase.getProductById(id);
     }
 
     @GetMapping("/products")
     @ResponseStatus(HttpStatus.OK)
     public List<GetProductResponse> getAllProducts() {
-        return productService.getAllProducts();
+        return getAllProductsUseCase.getAllProducts();
     }
 
 }
