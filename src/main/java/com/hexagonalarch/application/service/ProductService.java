@@ -1,29 +1,26 @@
-package com.hexagonalarch.application.usecases;
+package com.hexagonalarch.application.service;
 
-import com.hexagonalarch.domain.Product;
 import com.hexagonalarch.application.dto.request.CreateProductRequest;
 import com.hexagonalarch.application.dto.response.CreateProductResponse;
 import com.hexagonalarch.application.dto.response.GetProductResponse;
-import com.hexagonalarch.application.ports.inbound.ProductService;
+import com.hexagonalarch.application.ports.inbound.CreateProductUseCase;
+import com.hexagonalarch.application.ports.inbound.GetAllProductsUseCase;
+import com.hexagonalarch.application.ports.inbound.GetProductUseCase;
 import com.hexagonalarch.application.ports.outbound.ProductRepository;
-import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.hexagonalarch.domain.Product;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
-@Service
-@RequiredArgsConstructor
-public class ProductServiceImpl implements ProductService {
+@AllArgsConstructor
+public class ProductService implements CreateProductUseCase, GetProductUseCase, GetAllProductsUseCase {
 
     private final ProductRepository productRepository;
 
     @Override
     public CreateProductResponse createProduct(CreateProductRequest createProductRequest) {
-        Product product = new Product();
+        Product product = new Product(0L, "Teste", 10.0);
         product.setName(createProductRequest.getName());
         product.setPrice(createProductRequest.getPrice());
 
