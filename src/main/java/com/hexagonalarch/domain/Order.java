@@ -16,4 +16,9 @@ public class Order {
     private OrderStatus status;
     private Double totalPrice;
 
+    public Double getTotalPrice() {
+        return products.stream()
+                .mapToDouble(Product::getPrice)
+                .sum();
+    }
 }
