@@ -1,16 +1,6 @@
 server:
   port: 9090
 
-logging:
-  level:
-    org.springframework.web: DEBUG
-    org.springframework.boot.actuate.endpoint: DEBUG
-    org.springframework.boot.web.servlet: DEBUG
-    org.springframework.context.annotation: DEBUG
-    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: DEBUG
-
-    
-
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
