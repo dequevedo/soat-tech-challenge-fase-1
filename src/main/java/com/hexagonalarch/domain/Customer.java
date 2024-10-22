@@ -19,7 +19,6 @@ public class Customer {
 
     public static Customer valueOf(CreateCustomerRequest createCustomerRequest) {
         return Customer.builder()
-                .id(createCustomerRequest.getId())
                 .name(createCustomerRequest.getName())
                 .email(createCustomerRequest.getEmail())
                 .cpf(createCustomerRequest.getCpf())
