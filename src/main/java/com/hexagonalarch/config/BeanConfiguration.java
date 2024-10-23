@@ -4,8 +4,6 @@ import com.hexagonalarch.adapters.outbound.JpaCustomerRepository;
 import com.hexagonalarch.adapters.outbound.JpaCustomerRepositoryAdapter;
 import com.hexagonalarch.adapters.outbound.JpaProductRepository;
 import com.hexagonalarch.adapters.outbound.JpaProductRepositoryAdapter;
-import com.hexagonalarch.adapters.outbound.mapper.CustomerPersistenceMapper;
-import com.hexagonalarch.adapters.outbound.mapper.ProductPersistenceMapper;
 import com.hexagonalarch.application.service.CustomerService;
 import com.hexagonalarch.application.service.ProductService;
 import org.springframework.context.annotation.Bean;
@@ -15,13 +13,13 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    public JpaCustomerRepositoryAdapter jpaCustomerRepositoryAdapter(final JpaCustomerRepository jpaCustomerRepository, final CustomerPersistenceMapper customerPersistenceMapper) {
-        return new JpaCustomerRepositoryAdapter(jpaCustomerRepository, customerPersistenceMapper);
+    public JpaCustomerRepositoryAdapter jpaCustomerRepositoryAdapter(final JpaCustomerRepository jpaCustomerRepository) {
+        return new JpaCustomerRepositoryAdapter(jpaCustomerRepository);
     }
 
     @Bean
-    public JpaProductRepositoryAdapter jpaProductRepositoryAdapter(final JpaProductRepository jpaProductRepository, final ProductPersistenceMapper productPersistenceMapper) {
-        return new JpaProductRepositoryAdapter(jpaProductRepository, productPersistenceMapper);
+    public JpaProductRepositoryAdapter jpaProductRepositoryAdapter(final JpaProductRepository jpaProductRepository) {
+        return new JpaProductRepositoryAdapter(jpaProductRepository);
     }
 
     @Bean

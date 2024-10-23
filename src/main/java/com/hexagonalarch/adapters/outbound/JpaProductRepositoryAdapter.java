@@ -1,7 +1,6 @@
 package com.hexagonalarch.adapters.outbound;
 
 import com.hexagonalarch.adapters.outbound.entity.ProductEntity;
-import com.hexagonalarch.adapters.outbound.mapper.ProductPersistenceMapper;
 import com.hexagonalarch.application.ports.outbound.ProductOutboundPort;
 import com.hexagonalarch.domain.Product;
 import lombok.AllArgsConstructor;
@@ -14,25 +13,51 @@ public class JpaProductRepositoryAdapter implements ProductOutboundPort {
 
     private final JpaProductRepository jpaRepository;
 
-    private final ProductPersistenceMapper productPersistenceMapper;
-
     @Override
     public Product save(Product product) {
-        ProductEntity productEntity = jpaRepository.save(productPersistenceMapper.toProductEntity(product));
-        return productPersistenceMapper.toProduct(productEntity);
+        ProductEntity productEntity = jpaRepository.save(toProductEntity(product));
+        return toProduct(productEntity);
     }
 
     @Override
     public Optional<Product> findById(Long id) {
-        return jpaRepository.findById(id)
-                .map(productPersistenceMapper::toProduct);
+        Optional<ProductEntity> optionalProductEntity = jpaRepository.findById(id);
+        return optionalProductEntity.map(this::toProduct);
     }
 
     @Override
     public List<Product> findAll() {
         return jpaRepository.findAll().stream()
-                .map(productPersistenceMapper::toProduct)
+                .map(this::toProduct)
                 .toList();
+    }
+
+    private ProductEntity toProductEntity(Product product) {
+        if (product == null) {
+            return null;
+        }
+
+        return ProductEntity.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .category(product.getCategory())
+                .build();
+    }
+
+    private Product toProduct(ProductEntity productEntity) {
+        if (productEntity == null) {
+            return null;
+        }
+
+        return Product.builder()
+                .id(productEntity.getId())
+                .name(productEntity.getName())
+                .description(productEntity.getDescription())
+                .price(productEntity.getPrice())
+                .category(productEntity.getCategory())
+                .build();
     }
 
 }
