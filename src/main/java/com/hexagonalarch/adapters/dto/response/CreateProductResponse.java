@@ -18,12 +18,4 @@ public class CreateProductResponse {
 
     private Double price;
 
-    public static CreateProductResponse valueOf(Product product) {
-        return CreateProductResponse.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .price(product.getPrice())
-                .build();
-    }
-
 }

@@ -18,11 +18,4 @@ public class GetProductResponse {
 
     private Float value;
 
-    public static GetProductResponse valueOf(Product domain) {
-        return GetProductResponse.builder()
-                .id(domain.getId())
-                .name(domain.getName())
-                .build();
-    }
-
 }

@@ -20,13 +20,4 @@ public class GetCustomerResponse {
 
     private String cpf;
 
-    public static GetCustomerResponse valueOf(Customer customer) {
-        return GetCustomerResponse.builder()
-                .id(customer.getId())
-                .name(customer.getName())
-                .email(customer.getEmail())
-                .cpf(customer.getCpf())
-                .build();
-    }
-
 }
