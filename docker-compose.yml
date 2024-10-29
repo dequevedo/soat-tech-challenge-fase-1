@@ -31,9 +31,9 @@ services:
       - postgres
     restart: unless-stopped
 
-  poc-hexagonal-app:
+  tech-challenge-fase-1:
     container_name: poc-hexagonal-container
-    image: poc-hexagonal-app
+    image: tech-challenge-fase-1
     depends_on:
       - postgres
     environment:
