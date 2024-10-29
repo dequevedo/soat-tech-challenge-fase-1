@@ -1,35 +1,40 @@
 package com.hexagonalarch.config;
 
-import com.hexagonalarch.adapters.outbound.JpaCustomerRepository;
-import com.hexagonalarch.adapters.outbound.JpaCustomerRepositoryAdapter;
-import com.hexagonalarch.adapters.outbound.JpaProductRepository;
-import com.hexagonalarch.adapters.outbound.JpaProductRepositoryAdapter;
-import com.hexagonalarch.application.service.CustomerService;
-import com.hexagonalarch.application.service.ProductService;
+import com.hexagonalarch.adapters.inbound.ServicesFacade.CustomerServiceFacade;
+import com.hexagonalarch.adapters.inbound.ServicesFacade.ProductServiceFacade;
+import com.hexagonalarch.core.ports.in.*;
+import com.hexagonalarch.core.ports.out.CustomerRepositoryPort;
+import com.hexagonalarch.core.ports.out.ProductRepositoryPort;
+import com.hexagonalarch.core.service.CustomerService;
+import com.hexagonalarch.core.service.ProductService;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanConfiguration {
-
     @Bean
-    public JpaCustomerRepositoryAdapter jpaCustomerRepositoryAdapter(final JpaCustomerRepository jpaCustomerRepository) {
-        return new JpaCustomerRepositoryAdapter(jpaCustomerRepository);
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 
     @Bean
-    public JpaProductRepositoryAdapter jpaProductRepositoryAdapter(final JpaProductRepository jpaProductRepository) {
-        return new JpaProductRepositoryAdapter(jpaProductRepository);
+    public CustomerService customerService(CustomerRepositoryPort customerRepositoryPort) {
+        return new CustomerService(customerRepositoryPort);
     }
 
     @Bean
-    public CustomerService customerService(final JpaCustomerRepositoryAdapter jpaCustomerRepositoryAdapter) {
-        return new CustomerService(jpaCustomerRepositoryAdapter);
+    public ProductService productService(ProductRepositoryPort productRepositoryPort) {
+        return new ProductService(productRepositoryPort);
     }
 
     @Bean
-    public ProductService productService(final JpaProductRepositoryAdapter jpaProductRepositoryAdapter) {
-        return new ProductService(jpaProductRepositoryAdapter);
+    public CustomerServiceFacade customerServiceFacade(CreateCustomerUseCase customerService, GetCustomerUseCase getCustomerUseCase, GetAllCustomersUseCase getAllCustomersUseCase) {
+        return new CustomerServiceFacade(customerService, getCustomerUseCase, getAllCustomersUseCase);
     }
 
+    @Bean
+    public ProductServiceFacade productServiceFacade(CreateProductUseCase createProductUseCase, GetProductUseCase getProductUseCase, GetAllProductsUseCase getAllProductsUseCase) {
+        return new ProductServiceFacade(createProductUseCase, getProductUseCase, getAllProductsUseCase);
+    }
 }

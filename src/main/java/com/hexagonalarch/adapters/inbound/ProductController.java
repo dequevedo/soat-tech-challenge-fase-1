@@ -1,11 +1,11 @@
 package com.hexagonalarch.adapters.inbound;
 
-import com.hexagonalarch.application.dto.request.CreateProductRequest;
-import com.hexagonalarch.application.dto.response.CreateProductResponse;
-import com.hexagonalarch.application.dto.response.GetProductResponse;
-import com.hexagonalarch.application.ports.inbound.CreateProductUseCase;
-import com.hexagonalarch.application.ports.inbound.GetAllProductsUseCase;
-import com.hexagonalarch.application.ports.inbound.GetProductUseCase;
+import com.hexagonalarch.adapters.converters.GenericConverter;
+import com.hexagonalarch.adapters.dto.request.CreateProductRequest;
+import com.hexagonalarch.adapters.dto.response.CreateProductResponse;
+import com.hexagonalarch.adapters.dto.response.GetProductResponse;
+import com.hexagonalarch.adapters.inbound.ServicesFacade.ProductServiceFacade;
+import com.hexagonalarch.core.domain.Product;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,28 +18,30 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final CreateProductUseCase createProductUseCase;
+    private final ProductServiceFacade productServiceFacade;
+    private final GenericConverter genericConverter;
 
-    private final GetProductUseCase getProductUseCase;
-
-    private final GetAllProductsUseCase getAllProductsUseCase;
-
-    @PostMapping(value = "/products")
+    @PostMapping("/products")
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateProductResponse createProduct(@Valid @RequestBody CreateProductRequest product) {
-        return createProductUseCase.createProduct(product);
+    public CreateProductResponse createProduct(@Valid @RequestBody CreateProductRequest productRequest) {
+        Product productInput = genericConverter.toDomain(productRequest, Product.class);
+        Product newProduct = productServiceFacade.createProduct(productInput);
+        return genericConverter.toDto(newProduct, CreateProductResponse.class);
     }
 
-    @GetMapping(value = "/products/{id}")
+    @GetMapping("/products/{id}")
     @ResponseStatus(HttpStatus.OK)
     public GetProductResponse getProductById(@PathVariable Long id) {
-        return getProductUseCase.getProductById(id);
+        Product product = productServiceFacade.getProductById(id);
+        return genericConverter.toDto(product, GetProductResponse.class);
     }
 
-    @GetMapping(value = "/products")
+    @GetMapping("/products")
     @ResponseStatus(HttpStatus.OK)
     public List<GetProductResponse> getAllProducts() {
-        return getAllProductsUseCase.getAllProducts();
+        return productServiceFacade.getAllProducts()
+                .stream()
+                .map(product -> genericConverter.toDto(product, GetProductResponse.class))
+                .toList();
     }
-
 }
