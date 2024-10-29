@@ -31,6 +31,21 @@ services:
       - postgres
     restart: unless-stopped
 
+  poc-hexagonal-app:
+    container_name: poc-hexagonal-container
+    image: poc-hexagonal-app
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-postgres}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "8080:8080"
+    networks:
+      - postgres
+    restart: unless-stopped
+
 networks:
   postgres:
     driver: bridge
