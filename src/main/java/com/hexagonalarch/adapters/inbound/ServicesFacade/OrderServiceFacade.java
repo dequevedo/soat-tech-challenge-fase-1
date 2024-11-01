@@ -1,5 +1,6 @@
 package com.hexagonalarch.adapters.inbound.ServicesFacade;
 
+import com.hexagonalarch.adapters.dto.request.CreateOrderRequest;
 import com.hexagonalarch.core.domain.Order;
 import com.hexagonalarch.core.ports.in.CreateOrderUseCase;
 import com.hexagonalarch.core.ports.in.GetAllOrdersUseCase;
@@ -21,8 +22,8 @@ public class OrderServiceFacade {
         this.getAllOrdersUseCase = getAllOrdersUseCase;
     }
 
-    public Order createOrder(Order order) {
-        return createOrderUseCase.createOrder(order);
+    public Order createOrder(CreateOrderRequest createOrderRequest) {
+        return createOrderUseCase.createOrder(createOrderRequest.getCustomerId(), createOrderRequest.getProductIds());
     }
 
     public Order getOrderById(Long id) {

@@ -11,8 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateOrderRequest {
 
+    private Long customerId;
+
     private List<Long> productIds;
-    
-    private String customerIdentification;
 
 }

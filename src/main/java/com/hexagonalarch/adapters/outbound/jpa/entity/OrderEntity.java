@@ -31,10 +31,4 @@ public class OrderEntity {
 
     private Double totalPrice;
 
-    public Double getTotalPrice() {
-        return products.stream()
-                .mapToDouble(ProductEntity::getPrice)
-                .sum();
-    }
-
 }

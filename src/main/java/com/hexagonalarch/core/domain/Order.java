@@ -56,7 +56,7 @@ public class Order {
     }
 
     public Double getTotalPrice() {
-        return products.stream()
+        return products == null ? 0.0 : products.stream()
                 .mapToDouble(Product::getPrice)
                 .sum();
     }
