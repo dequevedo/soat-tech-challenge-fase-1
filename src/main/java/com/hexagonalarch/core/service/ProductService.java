@@ -1,11 +1,8 @@
 package com.hexagonalarch.core.service;
 
-import com.hexagonalarch.adapters.dto.request.CreateProductRequest;
-import com.hexagonalarch.adapters.dto.response.CreateProductResponse;
-import com.hexagonalarch.adapters.dto.response.GetProductResponse;
-import com.hexagonalarch.core.ports.in.CreateProductUseCase;
-import com.hexagonalarch.core.ports.in.GetAllProductsUseCase;
-import com.hexagonalarch.core.ports.in.GetProductUseCase;
+import com.hexagonalarch.core.ports.in.Product.CreateProductUseCase;
+import com.hexagonalarch.core.ports.in.Product.GetAllProductsUseCase;
+import com.hexagonalarch.core.ports.in.Product.GetProductUseCase;
 import com.hexagonalarch.core.ports.out.ProductRepositoryPort;
 import com.hexagonalarch.core.domain.Product;
 import lombok.AllArgsConstructor;

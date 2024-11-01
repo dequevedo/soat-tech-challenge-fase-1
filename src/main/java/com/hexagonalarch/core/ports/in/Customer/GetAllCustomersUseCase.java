@@ -1,6 +1,5 @@
-package com.hexagonalarch.core.ports.in;
+package com.hexagonalarch.core.ports.in.Customer;
 
-import com.hexagonalarch.adapters.dto.response.GetCustomerResponse;
 import com.hexagonalarch.core.domain.Customer;
 
 import java.util.List;
