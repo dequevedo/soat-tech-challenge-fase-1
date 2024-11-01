@@ -1,15 +1,9 @@
 package com.hexagonalarch.core.domain;
 
 import com.hexagonalarch.core.domain.enumeration.OrderStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Order {
 
     private Long id;
@@ -18,9 +12,56 @@ public class Order {
     private OrderStatus status;
     private Double totalPrice;
 
+    public Order() {
+    }
+
+    public Order(Long id, Customer customer, List<Product> products, OrderStatus status, Double totalPrice) {
+        this.id = id;
+        this.customer = customer;
+        this.products = products;
+        this.status = status;
+        this.totalPrice = totalPrice;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
     public Double getTotalPrice() {
         return products.stream()
                 .mapToDouble(Product::getPrice)
                 .sum();
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
