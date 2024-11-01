@@ -10,6 +10,15 @@
 3. (Optional) Docker Desktop
 4. (Optional) Beekeeper Studio or DBeaver
 
+### How to run this project using Dockerfile and Docker Compose
+
+1. (Windows only) Make sure you are inside WSL terminal
+2. In the same folder as the Dockerfile, run the command: ```docker build -t tech-challenge-fase-1 .```
+3. Run the command: ```docker compose up -d```
+4. List all containers with ```docker ps``` and make sure these 3 are up and running: poc-hexagonal-container,
+   pgadmin_container, postgres_container
+5. Enjoy! API should be accessible on localhost:8080
+
 ### Running Docker containers
 
 1. Access the folder where docker-compose.yml is located
