@@ -24,7 +24,16 @@ public class OrderEntity {
     private CustomerEntity customer;
 
     @OneToMany
-    private List<ProductEntity> products;
+    private List<ProductEntity> snack;
+
+    @OneToMany
+    private List<ProductEntity> side;
+
+    @OneToMany
+    private List<ProductEntity> drink;
+
+    @OneToMany
+    private List<ProductEntity> dessert;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;

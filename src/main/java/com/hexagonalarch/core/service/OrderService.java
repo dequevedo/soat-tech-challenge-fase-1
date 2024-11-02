@@ -10,7 +10,6 @@ import com.hexagonalarch.core.ports.in.GetOrderUseCase;
 import com.hexagonalarch.core.ports.out.CustomerRepositoryPort;
 import com.hexagonalarch.core.ports.out.OrderRepositoryPort;
 import com.hexagonalarch.core.ports.out.ProductRepositoryPort;
-import com.hexagonalarch.core.service.validations.ValidationResult;
 import com.hexagonalarch.core.service.validations.factory.OrderValidationFactory;
 import com.hexagonalarch.exception.NotFoundException;
 
@@ -62,7 +61,7 @@ public class OrderService implements CreateOrderUseCase, GetOrderUseCase, GetAll
         order.setDessert(dessertProducts);
         order.setStatus(OrderStatus.RECEBIDO);
 
-        ValidationResult validate = OrderValidationFactory.getValidatorsForCreateOrder().validate(order);
+        OrderValidationFactory.getValidatorsForCreateOrder().validate(order);
 
         return orderRepository.save(order);
     }
