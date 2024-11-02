@@ -34,5 +34,15 @@ public class JpaCustomerRepositoryAdapter implements CustomerRepositoryPort {
                 .map(entity -> modelMapper.map(entity, Customer.class))
                 .toList();
     }
+
+    @Override
+    public Optional<Customer> findByCpf(String cpf) {
+        return jpaRepository.findByCpf(cpf).map(entity -> modelMapper.map(entity, Customer.class));
+    }
+
+    @Override
+    public Optional<Customer> findByEmail(String email) {
+        return jpaRepository.findByEmail(email).map(entity -> modelMapper.map(entity, Customer.class));
+    }
 }
 
