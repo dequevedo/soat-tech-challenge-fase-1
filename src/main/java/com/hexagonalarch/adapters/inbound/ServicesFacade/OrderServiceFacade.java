@@ -23,7 +23,12 @@ public class OrderServiceFacade {
     }
 
     public Order createOrder(CreateOrderRequest createOrderRequest) {
-        return createOrderUseCase.createOrder(createOrderRequest.getCustomerId(), createOrderRequest.getProductIds());
+        return createOrderUseCase.createOrder(
+                createOrderRequest.getCustomerId(),
+                createOrderRequest.getProductIds().getSnack(),
+                createOrderRequest.getProductIds().getSide(),
+                createOrderRequest.getProductIds().getDrink(),
+                createOrderRequest.getProductIds().getDessert());
     }
 
     public Order getOrderById(Long id) {
