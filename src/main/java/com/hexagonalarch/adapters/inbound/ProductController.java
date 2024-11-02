@@ -6,6 +6,7 @@ import com.hexagonalarch.adapters.dto.response.CreateProductResponse;
 import com.hexagonalarch.adapters.dto.response.GetProductResponse;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.ProductServiceFacade;
 import com.hexagonalarch.core.domain.Product;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1")
 @RequiredArgsConstructor
+@Tag(name = "Products", description = "Operations related to Products")
 public class ProductController {
 
     private final ProductServiceFacade productServiceFacade;

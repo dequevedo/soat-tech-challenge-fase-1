@@ -3,7 +3,13 @@ package com.hexagonalarch.config;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.CustomerServiceFacade;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.OrderServiceFacade;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.ProductServiceFacade;
-import com.hexagonalarch.core.ports.in.*;
+import com.hexagonalarch.core.ports.in.Customer.CreateCustomerUseCase;
+import com.hexagonalarch.core.ports.in.Customer.GetAllCustomersUseCase;
+import com.hexagonalarch.core.ports.in.Customer.GetCustomerUseCase;
+import com.hexagonalarch.core.ports.in.Customer.IdentifyOrCreateCustomerUseCase;
+import com.hexagonalarch.core.ports.in.Product.CreateProductUseCase;
+import com.hexagonalarch.core.ports.in.Product.GetAllProductsUseCase;
+import com.hexagonalarch.core.ports.in.Product.GetProductUseCase;
 import com.hexagonalarch.core.ports.out.CustomerRepositoryPort;
 import com.hexagonalarch.core.ports.out.OrderRepositoryPort;
 import com.hexagonalarch.core.ports.out.ProductRepositoryPort;
@@ -37,8 +43,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public CustomerServiceFacade customerServiceFacade(CreateCustomerUseCase customerService, GetCustomerUseCase getCustomerUseCase, GetAllCustomersUseCase getAllCustomersUseCase) {
-        return new CustomerServiceFacade(customerService, getCustomerUseCase, getAllCustomersUseCase);
+    public CustomerServiceFacade customerServiceFacade(CreateCustomerUseCase customerService, GetCustomerUseCase getCustomerUseCase, GetAllCustomersUseCase getAllCustomersUseCase, IdentifyOrCreateCustomerUseCase identifyOrCreateCustomerUseCase) {
+        return new CustomerServiceFacade(customerService, getCustomerUseCase, getAllCustomersUseCase, identifyOrCreateCustomerUseCase);
     }
 
     @Bean

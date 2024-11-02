@@ -1,6 +1,5 @@
-package com.hexagonalarch.core.ports.in;
+package com.hexagonalarch.core.ports.in.Product;
 
-import com.hexagonalarch.adapters.dto.response.GetProductResponse;
 import com.hexagonalarch.core.domain.Product;
 
 import java.util.List;

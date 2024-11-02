@@ -1,7 +1,9 @@
 package com.hexagonalarch.adapters.inbound.ServicesFacade;
 
 import com.hexagonalarch.core.domain.Product;
-import com.hexagonalarch.core.ports.in.*;
+import com.hexagonalarch.core.ports.in.Product.CreateProductUseCase;
+import com.hexagonalarch.core.ports.in.Product.GetAllProductsUseCase;
+import com.hexagonalarch.core.ports.in.Product.GetProductUseCase;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
