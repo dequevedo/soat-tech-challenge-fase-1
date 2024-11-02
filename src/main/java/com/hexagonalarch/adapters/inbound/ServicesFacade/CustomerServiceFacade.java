@@ -1,9 +1,10 @@
 package com.hexagonalarch.adapters.inbound.ServicesFacade;
 
 import com.hexagonalarch.core.domain.Customer;
-import com.hexagonalarch.core.ports.in.CreateCustomerUseCase;
-import com.hexagonalarch.core.ports.in.GetAllCustomersUseCase;
-import com.hexagonalarch.core.ports.in.GetCustomerUseCase;
+import com.hexagonalarch.core.ports.in.Customer.CreateCustomerUseCase;
+import com.hexagonalarch.core.ports.in.Customer.GetAllCustomersUseCase;
+import com.hexagonalarch.core.ports.in.Customer.GetCustomerUseCase;
+import com.hexagonalarch.core.ports.in.Customer.IdentifyOrCreateCustomerUseCase;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,13 +15,13 @@ public class CustomerServiceFacade {
     private final CreateCustomerUseCase createCustomerUseCase;
     private final GetCustomerUseCase getCustomerUseCase;
     private final GetAllCustomersUseCase getAllCustomersUseCase;
+    private final IdentifyOrCreateCustomerUseCase identifyOrCreateCustomerUseCase;
 
-    public CustomerServiceFacade(CreateCustomerUseCase createCustomerUseCase,
-                                 GetCustomerUseCase getCustomerUseCase,
-                                 GetAllCustomersUseCase getAllCustomersUseCase) {
+    public CustomerServiceFacade(CreateCustomerUseCase createCustomerUseCase, GetCustomerUseCase getCustomerUseCase, GetAllCustomersUseCase getAllCustomersUseCase, IdentifyOrCreateCustomerUseCase identifyOrCreateCustomerUseCase) {
         this.createCustomerUseCase = createCustomerUseCase;
         this.getCustomerUseCase = getCustomerUseCase;
         this.getAllCustomersUseCase = getAllCustomersUseCase;
+        this.identifyOrCreateCustomerUseCase = identifyOrCreateCustomerUseCase;
     }
 
     public Customer createCustomer(Customer customer) {
@@ -33,5 +34,9 @@ public class CustomerServiceFacade {
 
     public List<Customer> getAllCustomers() {
         return getAllCustomersUseCase.getAllCustomers();
+    }
+
+    public Customer identifyOrCreateCustomer(Customer customer){
+        return identifyOrCreateCustomerUseCase.identifyOrCreateCustomer(customer);
     }
 }

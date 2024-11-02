@@ -37,6 +37,14 @@ public class CustomerController {
         return genericConverter.toDto(customer, GetCustomerResponse.class);
     }
 
+    @PostMapping("/identifyOrCreate")
+    @ResponseStatus(HttpStatus.OK)
+    public GetCustomerResponse identifyOrCreate(@Valid @RequestBody CreateCustomerRequest customerRequest) {
+        Customer customerInput = genericConverter.toDomain(customerRequest, Customer.class);
+        Customer customer = customerServiceFacade.identifyOrCreateCustomer(customerInput);
+        return genericConverter.toDto(customer, GetCustomerResponse.class);
+    }
+
     @GetMapping("/customers")
     @ResponseStatus(HttpStatus.OK)
     public List<GetCustomerResponse> getAllCustomers() {
