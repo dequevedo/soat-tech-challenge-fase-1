@@ -2,6 +2,7 @@ package com.hexagonalarch.adapters.inbound;
 
 import com.hexagonalarch.adapters.converters.GenericConverter;
 import com.hexagonalarch.adapters.dto.request.CreateOrderRequest;
+import com.hexagonalarch.adapters.dto.response.CreateOrderProductResponse;
 import com.hexagonalarch.adapters.dto.response.CreateOrderResponse;
 import com.hexagonalarch.adapters.dto.response.GetOrderResponse;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.OrderServiceFacade;
@@ -25,7 +26,23 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public CreateOrderResponse createOrder(@Valid @RequestBody CreateOrderRequest createOrderRequest) {
         Order newOrder = orderServiceFacade.createOrder(createOrderRequest);
-        return genericConverter.toDto(newOrder, CreateOrderResponse.class);
+
+        var response = genericConverter.toDto(newOrder, CreateOrderResponse.class);
+
+        response.setSnacks(newOrder.getSnacks().stream()
+                .map(snack -> genericConverter.toDto(snack, CreateOrderProductResponse.class))
+                .toList());
+        response.setSides(newOrder.getSides().stream()
+                .map(side -> genericConverter.toDto(side, CreateOrderProductResponse.class))
+                .toList());
+        response.setDrinks(newOrder.getDrinks().stream()
+                .map(drink -> genericConverter.toDto(drink, CreateOrderProductResponse.class))
+                .toList());
+        response.setDesserts(newOrder.getDesserts().stream()
+                .map(dessert -> genericConverter.toDto(dessert, CreateOrderProductResponse.class))
+                .toList());
+
+        return response;
     }
 
     @GetMapping("/{id}")

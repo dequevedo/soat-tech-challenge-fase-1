@@ -23,17 +23,37 @@ public class OrderEntity {
     @ManyToOne
     private CustomerEntity customer;
 
-    @OneToMany
-    private List<ProductEntity> snack;
+    @ManyToMany
+    @JoinTable(
+            name = "order_entity_snack",
+            joinColumns = @JoinColumn(name = "order_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "snack_id")
+    )
+    private List<ProductEntity> snacks;
 
-    @OneToMany
-    private List<ProductEntity> side;
+    @ManyToMany
+    @JoinTable(
+            name = "order_entity_side",
+            joinColumns = @JoinColumn(name = "order_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "side_id")
+    )
+    private List<ProductEntity> sides;
 
-    @OneToMany
-    private List<ProductEntity> drink;
+    @ManyToMany
+    @JoinTable(
+            name = "order_entity_drink",
+            joinColumns = @JoinColumn(name = "order_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "drink_id")
+    )
+    private List<ProductEntity> drinks;
 
-    @OneToMany
-    private List<ProductEntity> dessert;
+    @ManyToMany
+    @JoinTable(
+            name = "order_entity_dessert",
+            joinColumns = @JoinColumn(name = "order_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "dessert_id")
+    )
+    private List<ProductEntity> desserts;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;

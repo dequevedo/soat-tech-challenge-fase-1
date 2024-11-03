@@ -10,7 +10,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetOrderResponse {
+
     private Long orderId;
+
     private String status;
-    private List<CreateOrderResponse.ProductDetail> products;
+
+    private List<CreateOrderProductResponse> snacks;
+
+    private List<CreateOrderProductResponse> sides;
+
+    private List<CreateOrderProductResponse> drinks;
+
+    private List<CreateOrderProductResponse> desserts;
+
 }
