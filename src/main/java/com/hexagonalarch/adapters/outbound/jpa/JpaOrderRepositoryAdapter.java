@@ -19,6 +19,20 @@ public class JpaOrderRepositoryAdapter implements OrderRepositoryPort {
 
     @Override
     public Order save(Order order) {
+        modelMapper.typeMap(Order.class, OrderEntity.class).addMappings(mapper -> {
+            mapper.map(Order::getSnacks, OrderEntity::setSnack);
+            mapper.map(Order::getSides, OrderEntity::setSide);
+            mapper.map(Order::getDrinks, OrderEntity::setDrink);
+            mapper.map(Order::getDesserts, OrderEntity::setDessert);
+        });
+
+        modelMapper.typeMap(OrderEntity.class, Order.class).addMappings(mapper -> {
+            mapper.map(OrderEntity::getSnack, Order::setSnacks);
+            mapper.map(OrderEntity::getSide, Order::setSides);
+            mapper.map(OrderEntity::getDrink, Order::setDrinks);
+            mapper.map(OrderEntity::getDessert, Order::setDesserts);
+        });
+
         OrderEntity orderEntity = jpaRepository.save(modelMapper.map(order, OrderEntity.class));
         return modelMapper.map(orderEntity, Order.class);
     }

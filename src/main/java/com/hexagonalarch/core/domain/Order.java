@@ -8,28 +8,28 @@ public class Order {
 
     private Long id;
 
-    private Customer customer;
+    private Long customerId;
 
-    private List<Product> snack;
+    private List<Product> snacks;
 
-    private List<Product> side;
+    private List<Product> sides;
 
-    private List<Product> drink;
+    private List<Product> drinks;
 
-    private List<Product> dessert;
+    private List<Product> desserts;
 
     private OrderStatus status;
 
     public Order() {
     }
 
-    public Order(Long id, Customer customer, List<Product> snack, List<Product> side, List<Product> drink, List<Product> dessert, OrderStatus status) {
+    public Order(Long id, Long customerId, List<Product> snacks, List<Product> sides, List<Product> drinks, List<Product> desserts, OrderStatus status) {
         this.id = id;
-        this.customer = customer;
-        this.snack = snack;
-        this.side = side;
-        this.drink = drink;
-        this.dessert = dessert;
+        this.customerId = customerId;
+        this.snacks = snacks;
+        this.sides = sides;
+        this.drinks = drinks;
+        this.desserts = desserts;
         this.status = status;
     }
 
@@ -41,44 +41,44 @@ public class Order {
         this.id = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
-    public List<Product> getSnack() {
-        return snack;
+    public List<Product> getSnacks() {
+        return snacks;
     }
 
-    public void setSnack(List<Product> snack) {
-        this.snack = snack;
+    public void setSnacks(List<Product> snacks) {
+        this.snacks = snacks;
     }
 
-    public List<Product> getSide() {
-        return side;
+    public List<Product> getSides() {
+        return sides;
     }
 
-    public void setSide(List<Product> side) {
-        this.side = side;
+    public void setSides(List<Product> sides) {
+        this.sides = sides;
     }
 
-    public List<Product> getDrink() {
-        return drink;
+    public List<Product> getDrinks() {
+        return drinks;
     }
 
-    public void setDrink(List<Product> drink) {
-        this.drink = drink;
+    public void setDrinks(List<Product> drinks) {
+        this.drinks = drinks;
     }
 
-    public List<Product> getDessert() {
-        return dessert;
+    public List<Product> getDesserts() {
+        return desserts;
     }
 
-    public void setDessert(List<Product> dessert) {
-        this.dessert = dessert;
+    public void setDesserts(List<Product> desserts) {
+        this.desserts = desserts;
     }
 
     public OrderStatus getStatus() {
@@ -91,10 +91,10 @@ public class Order {
 
     public Double getTotalPrice() {
         double total = 0.0;
-        if (snack != null) total += snack.stream().mapToDouble(Product::getPrice).sum();
-        if (side != null) total += side.stream().mapToDouble(Product::getPrice).sum();
-        if (drink != null) total += drink.stream().mapToDouble(Product::getPrice).sum();
-        if (dessert != null) total += dessert.stream().mapToDouble(Product::getPrice).sum();
+        if (snacks != null) total += snacks.stream().mapToDouble(Product::getPrice).sum();
+        if (sides != null) total += sides.stream().mapToDouble(Product::getPrice).sum();
+        if (drinks != null) total += drinks.stream().mapToDouble(Product::getPrice).sum();
+        if (desserts != null) total += desserts.stream().mapToDouble(Product::getPrice).sum();
         return total;
     }
 }

@@ -56,7 +56,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public OrderServiceFacade orderServiceFacade(CreateOrderUseCase createOrderUseCase, GetOrderUseCase getOrderUseCase, GetAllOrdersUseCase getAllOrdersUseCase) {
-        return new OrderServiceFacade(createOrderUseCase, getOrderUseCase, getAllOrdersUseCase);
+    public OrderServiceFacade orderServiceFacade(CreateOrderUseCase createOrderUseCase, GetOrderUseCase getOrderUseCase, GetAllOrdersUseCase getAllOrdersUseCase, CustomerRepositoryPort customerRepositoryPort, ProductRepositoryPort productRepositoryPort) {
+        return new OrderServiceFacade(createOrderUseCase, getOrderUseCase, getAllOrdersUseCase, customerRepositoryPort, productRepositoryPort);
     }
 }

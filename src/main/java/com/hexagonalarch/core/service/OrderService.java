@@ -1,8 +1,6 @@
 package com.hexagonalarch.core.service;
 
-import com.hexagonalarch.core.domain.Customer;
 import com.hexagonalarch.core.domain.Order;
-import com.hexagonalarch.core.domain.Product;
 import com.hexagonalarch.core.domain.enumeration.OrderStatus;
 import com.hexagonalarch.core.ports.in.CreateOrderUseCase;
 import com.hexagonalarch.core.ports.in.GetAllOrdersUseCase;
@@ -29,36 +27,22 @@ public class OrderService implements CreateOrderUseCase, GetOrderUseCase, GetAll
     }
 
     @Override
-    public Order createOrder(Long customerId, List<Long> snacks, List<Long> sides, List<Long> drinks, List<Long> desserts) {
-        Customer customer = customerRepository.findById(customerId)
+    public Order createOrder(Order order) {
+        customerRepository.findById(order.getCustomerId())
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
 
-        List<Product> snackProducts = snacks.stream()
-                .map(id -> productRepository.findById(id)
-                        .orElseThrow(() -> new NotFoundException("Product not found for ID: " + id)))
-                .toList();
+        order.getSnacks().forEach(snack -> productRepository.findById(snack.getId())
+                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + snack.getId())));
 
-        List<Product> sideProducts = sides.stream()
-                .map(id -> productRepository.findById(id)
-                        .orElseThrow(() -> new NotFoundException("Product not found for ID: " + id)))
-                .toList();
+        order.getSides().forEach(side -> productRepository.findById(side.getId())
+                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + side.getId())));
 
-        List<Product> drinkProducts = drinks.stream()
-                .map(id -> productRepository.findById(id)
-                        .orElseThrow(() -> new NotFoundException("Product not found for ID: " + id)))
-                .toList();
+        order.getDrinks().forEach(drink -> productRepository.findById(drink.getId())
+                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + drink.getId())));
 
-        List<Product> dessertProducts = desserts.stream()
-                .map(id -> productRepository.findById(id)
-                        .orElseThrow(() -> new NotFoundException("Product not found for ID: " + id)))
-                .toList();
+        order.getDesserts().forEach(dessert -> productRepository.findById(dessert.getId())
+                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + dessert.getId())));
 
-        Order order = new Order();
-        order.setCustomer(customer);
-        order.setSnack(snackProducts);
-        order.setSide(sideProducts);
-        order.setDrink(drinkProducts);
-        order.setDessert(dessertProducts);
         order.setStatus(OrderStatus.RECEBIDO);
 
         OrderValidationFactory.getValidatorsForCreateOrder().validate(order);

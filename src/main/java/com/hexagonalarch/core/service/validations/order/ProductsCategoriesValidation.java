@@ -13,19 +13,19 @@ public class ProductsCategoriesValidation implements Validator<Order> {
 
     @Override
     public ValidationResult validate(Order order) {
-        if (hasInvalidCategory(order.getSnack(), ProductCategory.LANCHE)) {
+        if (hasInvalidCategory(order.getSnacks(), ProductCategory.LANCHE)) {
             throw new BusinessException("Invalid products found in 'snack' category.");
         }
 
-        if (hasInvalidCategory(order.getSide(), ProductCategory.ACOMPANHAMENTO)) {
+        if (hasInvalidCategory(order.getSides(), ProductCategory.ACOMPANHAMENTO)) {
             throw new BusinessException("Invalid products found in 'side' category.");
         }
 
-        if (hasInvalidCategory(order.getDrink(), ProductCategory.BEBIDA)) {
+        if (hasInvalidCategory(order.getDrinks(), ProductCategory.BEBIDA)) {
             throw new BusinessException("Invalid products found in 'drink' category.");
         }
 
-        if (hasInvalidCategory(order.getDessert(), ProductCategory.SOBREMESA)) {
+        if (hasInvalidCategory(order.getDesserts(), ProductCategory.SOBREMESA)) {
             throw new BusinessException("Invalid products found in 'dessert' category.");
         }
 
