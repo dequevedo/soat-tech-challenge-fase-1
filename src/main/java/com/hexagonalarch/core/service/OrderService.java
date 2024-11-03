@@ -53,7 +53,7 @@ public class OrderService implements CreateOrderUseCase, GetOrderUseCase, GetAll
     @Override
     public Order getOrderById(Long id) {
         Optional<Order> order = orderRepository.findById(id);
-        return order.orElseThrow(() -> new RuntimeException("Order not found"));
+        return order.orElseThrow(() -> new NotFoundException("Order not found"));
     }
 
     @Override
