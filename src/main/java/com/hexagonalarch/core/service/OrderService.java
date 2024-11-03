@@ -57,7 +57,7 @@ public class OrderService implements CreateOrderUseCase, GetOrderUseCase, GetAll
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    public List<Order> getAllOrders(OrderStatus statusFilter) {
+        return orderRepository.findAll(statusFilter);
     }
 }

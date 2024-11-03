@@ -2,6 +2,7 @@ package com.hexagonalarch.adapters.outbound.jpa;
 
 import com.hexagonalarch.adapters.outbound.jpa.entity.OrderEntity;
 import com.hexagonalarch.core.domain.Order;
+import com.hexagonalarch.core.domain.enumeration.OrderStatus;
 import com.hexagonalarch.core.ports.out.OrderRepositoryPort;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -44,10 +46,11 @@ public class JpaOrderRepositoryAdapter implements OrderRepositoryPort {
     }
 
     @Override
-    public List<Order> findAll() {
-        return jpaRepository.findAll().stream()
+    public List<Order> findAll(OrderStatus orderStatus) {
+        List<OrderEntity> orderEntities = (orderStatus == null) ? jpaRepository.findAll() : jpaRepository.findAllByStatus(orderStatus);
+        return orderEntities.stream()
                 .map(orderEntity -> modelMapper.map(orderEntity, Order.class))
-                .toList();
+                .collect(Collectors.toList());
     }
 }
 

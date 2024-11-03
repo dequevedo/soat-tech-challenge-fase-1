@@ -23,6 +23,9 @@ public class OrderEntity {
     @ManyToOne
     private CustomerEntity customer;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     @ManyToMany
     @JoinTable(
             name = "order_entity_snack",
@@ -54,9 +57,6 @@ public class OrderEntity {
             inverseJoinColumns = @JoinColumn(name = "dessert_id")
     )
     private List<ProductEntity> desserts;
-
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
 
     private Double totalPrice;
 

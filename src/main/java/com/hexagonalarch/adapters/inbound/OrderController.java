@@ -6,6 +6,8 @@ import com.hexagonalarch.adapters.dto.response.CreateOrderResponse;
 import com.hexagonalarch.adapters.dto.response.GetOrderResponse;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.OrderServiceFacade;
 import com.hexagonalarch.core.domain.Order;
+import com.hexagonalarch.core.domain.enumeration.OrderStatus;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
+@Tag(name = "Orders", description = "Operations related to Orders")
 public class OrderController {
 
     private final OrderServiceFacade orderServiceFacade;
@@ -37,9 +40,9 @@ public class OrderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GetOrderResponse> getAllOrders() {
-        return orderServiceFacade.getAllOrders()
-                .stream()
+    public List<GetOrderResponse> getAllOrders(@RequestParam(required = false) OrderStatus statusFilter) {
+        List<Order> orders = orderServiceFacade.getAllOrders(statusFilter);
+        return orders.stream()
                 .map(order -> genericConverter.toDto(order, GetOrderResponse.class))
                 .toList();
     }

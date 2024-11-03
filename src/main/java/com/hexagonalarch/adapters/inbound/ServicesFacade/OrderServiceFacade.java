@@ -55,8 +55,8 @@ public class OrderServiceFacade {
         return getOrderUseCase.getOrderById(id);
     }
 
-    public List<Order> getAllOrders() {
-        return getAllOrdersUseCase.getAllOrders();
+    public List<Order> getAllOrders(OrderStatus statusFilter) {
+        return getAllOrdersUseCase.getAllOrders(statusFilter);
     }
 
     private List<Product> getProductsByIds(List<Long> productIds) {
