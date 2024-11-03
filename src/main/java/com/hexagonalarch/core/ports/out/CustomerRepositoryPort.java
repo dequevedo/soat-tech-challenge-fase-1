@@ -13,4 +13,8 @@ public interface CustomerRepositoryPort {
 
     List<Customer> findAll();
 
+    Optional<Customer> findByCpf(String cpf);
+
+    Optional<Customer> findByEmail(String email);
+
 }
