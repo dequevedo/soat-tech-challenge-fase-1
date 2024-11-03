@@ -10,6 +10,8 @@ public class Order {
 
     private Long customerId;
 
+    private OrderStatus status;
+
     private List<Product> snacks;
 
     private List<Product> sides;
@@ -18,19 +20,17 @@ public class Order {
 
     private List<Product> desserts;
 
-    private OrderStatus status;
-
     public Order() {
     }
 
-    public Order(Long id, Long customerId, List<Product> snacks, List<Product> sides, List<Product> drinks, List<Product> desserts, OrderStatus status) {
+    public Order(Long id, Long customerId, OrderStatus status, List<Product> snacks, List<Product> sides, List<Product> drinks, List<Product> desserts) {
         this.id = id;
         this.customerId = customerId;
+        this.status = status;
         this.snacks = snacks;
         this.sides = sides;
         this.drinks = drinks;
         this.desserts = desserts;
-        this.status = status;
     }
 
     public Long getId() {
@@ -47,6 +47,14 @@ public class Order {
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 
     public List<Product> getSnacks() {
@@ -79,14 +87,6 @@ public class Order {
 
     public void setDesserts(List<Product> desserts) {
         this.desserts = desserts;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
     }
 
     public Double getTotalPrice() {

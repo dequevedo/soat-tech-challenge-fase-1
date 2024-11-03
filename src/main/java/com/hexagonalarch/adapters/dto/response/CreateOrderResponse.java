@@ -1,5 +1,6 @@
 package com.hexagonalarch.adapters.dto.response;
 
+import com.hexagonalarch.core.domain.enumeration.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,9 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateOrderResponse {
 
-    private Long orderId;
+    private Long id;
 
-    private String status;
+    private Long customerId;
+
+    private OrderStatus status;
 
     private List<CreateOrderProductResponse> snacks;
 

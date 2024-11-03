@@ -46,7 +46,7 @@ public class OrderServiceFacade {
         List<Product> drinks = getProductsByIds(createOrderRequest.getProductIds().getDrink());
         List<Product> desserts = getProductsByIds(createOrderRequest.getProductIds().getDessert());
 
-        Order order = new Order(null, customer.getId(), snacks, sides, drinks, desserts, OrderStatus.RECEBIDO);
+        Order order = new Order(null, customer.getId(), OrderStatus.RECEBIDO, snacks, sides, drinks, desserts);
 
         return createOrderUseCase.createOrder(order);
     }
