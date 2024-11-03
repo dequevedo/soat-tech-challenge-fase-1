@@ -10,8 +10,8 @@ public class CustomerIsNotNullValidation implements Validator<Customer> {
     public ValidationResult validate(Customer customer) {
         if (customer.getCpf() == null || customer.getCpf().isEmpty() && customer.getEmail() == null ||
             customer.getEmail().isEmpty() && customer.getName() == null || customer.getName().isEmpty()){
-            throw new BusinessException("Cliente não identificado, dados estão nulos");
+            return new ValidationResult(false, "Cliente não identificado, dados estão nulos");
         }
-        return new ValidationResult(true, "CPF válido");
+        return new ValidationResult(true, null);
     }
 }

@@ -5,10 +5,9 @@ import com.hexagonalarch.core.ports.in.Customer.GetCustomerUseCase;
 import com.hexagonalarch.core.ports.in.Customer.IdentifyOrCreateCustomerUseCase;
 import com.hexagonalarch.core.ports.out.CustomerRepositoryPort;
 import com.hexagonalarch.core.domain.Customer;
-import com.hexagonalarch.core.service.validations.ValidationResult;
-import com.hexagonalarch.core.service.validations.Validator;
-import com.hexagonalarch.core.service.validations.customer.CpfValidation;
-import com.hexagonalarch.core.service.validations.factory.CostumerValidationFactory;
+import com.hexagonalarch.core.service.strategy.NavigationResult;
+import com.hexagonalarch.core.service.strategy.customer.CustomerStrategy;
+import com.hexagonalarch.core.service.strategy.customer.factories.IdentifyOrCreateCustomerFactory;
 import com.hexagonalarch.exception.BusinessException;
 
 import java.util.List;
@@ -42,10 +41,15 @@ public class CustomerService implements CreateCustomerUseCase, GetCustomerUseCas
 
     @Override
     public Customer identifyOrCreateCustomer(Customer c) {
-        ValidationResult validate = CostumerValidationFactory.getValidatorsForIdentify().validate(c);
-        if(!validate.isValid()){
-            throw new BusinessException(validate.getMessage());
+
+        IdentifyOrCreateCustomerFactory factory = new IdentifyOrCreateCustomerFactory(customerRepository);
+        CustomerStrategy strategy = factory.getStrategy(c);
+
+        NavigationResult<Customer> result = strategy.execute(c);
+        if (!result.getValidationResult().isValid()) {
+            throw new BusinessException(result.getValidationResult().getMessage());
         }
-        return new Customer( Integer.toUnsignedLong(21212), "kdfllfdl","dsldsçlsdçl", "834348834");
+
+        return result.getResult();
     }
 }
