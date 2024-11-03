@@ -2,6 +2,7 @@ package com.hexagonalarch.adapters.inbound;
 
 import com.hexagonalarch.adapters.converters.GenericConverter;
 import com.hexagonalarch.adapters.dto.request.CreateOrderRequest;
+import com.hexagonalarch.adapters.dto.request.UpdateOrderStatusRequest;
 import com.hexagonalarch.adapters.dto.response.CreateOrderResponse;
 import com.hexagonalarch.adapters.dto.response.GetOrderResponse;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.OrderServiceFacade;
@@ -45,5 +46,11 @@ public class OrderController {
         return orders.stream()
                 .map(order -> genericConverter.toDto(order, GetOrderResponse.class))
                 .toList();
+    }
+
+    @PatchMapping("/{id}/status")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateOrderStatus(@PathVariable Long id, @RequestBody UpdateOrderStatusRequest updateOrderStatusRequest) {
+        orderServiceFacade.updateOrderStatus(id, updateOrderStatusRequest.getStatus());
     }
 }

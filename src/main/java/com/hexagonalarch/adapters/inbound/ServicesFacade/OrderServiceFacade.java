@@ -5,9 +5,10 @@ import com.hexagonalarch.core.domain.Customer;
 import com.hexagonalarch.core.domain.Order;
 import com.hexagonalarch.core.domain.Product;
 import com.hexagonalarch.core.domain.enumeration.OrderStatus;
-import com.hexagonalarch.core.ports.in.CreateOrderUseCase;
-import com.hexagonalarch.core.ports.in.GetAllOrdersUseCase;
-import com.hexagonalarch.core.ports.in.GetOrderUseCase;
+import com.hexagonalarch.core.ports.in.Order.CreateOrderUseCase;
+import com.hexagonalarch.core.ports.in.Order.GetAllOrdersUseCase;
+import com.hexagonalarch.core.ports.in.Order.GetOrderUseCase;
+import com.hexagonalarch.core.ports.in.Order.UpdateOrderStatusUseCase;
 import com.hexagonalarch.core.ports.out.CustomerRepositoryPort;
 import com.hexagonalarch.core.ports.out.ProductRepositoryPort;
 import com.hexagonalarch.exception.NotFoundException;
@@ -21,17 +22,21 @@ public class OrderServiceFacade {
     private final CreateOrderUseCase createOrderUseCase;
     private final GetOrderUseCase getOrderUseCase;
     private final GetAllOrdersUseCase getAllOrdersUseCase;
+    private final UpdateOrderStatusUseCase updateOrderStatusUseCase;
+
     private final CustomerRepositoryPort customerRepository;
     private final ProductRepositoryPort productRepository;
 
     public OrderServiceFacade(CreateOrderUseCase createOrderUseCase,
                               GetOrderUseCase getOrderUseCase,
                               GetAllOrdersUseCase getAllOrdersUseCase,
+                              UpdateOrderStatusUseCase updateOrderStatusUseCase,
                               CustomerRepositoryPort customerRepository,
                               ProductRepositoryPort productRepository) {
         this.createOrderUseCase = createOrderUseCase;
         this.getOrderUseCase = getOrderUseCase;
         this.getAllOrdersUseCase = getAllOrdersUseCase;
+        this.updateOrderStatusUseCase = updateOrderStatusUseCase;
         this.customerRepository = customerRepository;
         this.productRepository = productRepository;
     }
@@ -57,6 +62,10 @@ public class OrderServiceFacade {
 
     public List<Order> getAllOrders(OrderStatus statusFilter) {
         return getAllOrdersUseCase.getAllOrders(statusFilter);
+    }
+
+    public void updateOrderStatus(Long id, OrderStatus status) {
+        updateOrderStatusUseCase.updateOrderStatus(id, status);
     }
 
     private List<Product> getProductsByIds(List<Long> productIds) {

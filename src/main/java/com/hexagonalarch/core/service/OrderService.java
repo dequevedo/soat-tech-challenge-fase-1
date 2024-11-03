@@ -2,9 +2,10 @@ package com.hexagonalarch.core.service;
 
 import com.hexagonalarch.core.domain.Order;
 import com.hexagonalarch.core.domain.enumeration.OrderStatus;
-import com.hexagonalarch.core.ports.in.CreateOrderUseCase;
-import com.hexagonalarch.core.ports.in.GetAllOrdersUseCase;
-import com.hexagonalarch.core.ports.in.GetOrderUseCase;
+import com.hexagonalarch.core.ports.in.Order.CreateOrderUseCase;
+import com.hexagonalarch.core.ports.in.Order.GetAllOrdersUseCase;
+import com.hexagonalarch.core.ports.in.Order.GetOrderUseCase;
+import com.hexagonalarch.core.ports.in.Order.UpdateOrderStatusUseCase;
 import com.hexagonalarch.core.ports.out.CustomerRepositoryPort;
 import com.hexagonalarch.core.ports.out.OrderRepositoryPort;
 import com.hexagonalarch.core.ports.out.ProductRepositoryPort;
@@ -14,7 +15,7 @@ import com.hexagonalarch.exception.NotFoundException;
 import java.util.List;
 import java.util.Optional;
 
-public class OrderService implements CreateOrderUseCase, GetOrderUseCase, GetAllOrdersUseCase {
+public class OrderService implements CreateOrderUseCase, GetOrderUseCase, GetAllOrdersUseCase, UpdateOrderStatusUseCase {
 
     private final OrderRepositoryPort orderRepository;
     private final CustomerRepositoryPort customerRepository;
@@ -59,5 +60,13 @@ public class OrderService implements CreateOrderUseCase, GetOrderUseCase, GetAll
     @Override
     public List<Order> getAllOrders(OrderStatus statusFilter) {
         return orderRepository.findAll(statusFilter);
+    }
+
+    @Override
+    public void updateOrderStatus(Long id, OrderStatus status) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Order not found"));
+        order.setStatus(status);
+        orderRepository.save(order);
     }
 }

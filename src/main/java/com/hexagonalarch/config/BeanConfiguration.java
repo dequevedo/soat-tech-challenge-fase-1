@@ -3,13 +3,14 @@ package com.hexagonalarch.config;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.CustomerServiceFacade;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.OrderServiceFacade;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.ProductServiceFacade;
-import com.hexagonalarch.core.ports.in.CreateOrderUseCase;
 import com.hexagonalarch.core.ports.in.Customer.CreateCustomerUseCase;
 import com.hexagonalarch.core.ports.in.Customer.GetAllCustomersUseCase;
 import com.hexagonalarch.core.ports.in.Customer.GetCustomerUseCase;
 import com.hexagonalarch.core.ports.in.Customer.IdentifyOrCreateCustomerUseCase;
-import com.hexagonalarch.core.ports.in.GetAllOrdersUseCase;
-import com.hexagonalarch.core.ports.in.GetOrderUseCase;
+import com.hexagonalarch.core.ports.in.Order.CreateOrderUseCase;
+import com.hexagonalarch.core.ports.in.Order.GetAllOrdersUseCase;
+import com.hexagonalarch.core.ports.in.Order.GetOrderUseCase;
+import com.hexagonalarch.core.ports.in.Order.UpdateOrderStatusUseCase;
 import com.hexagonalarch.core.ports.in.Product.CreateProductUseCase;
 import com.hexagonalarch.core.ports.in.Product.GetAllProductsUseCase;
 import com.hexagonalarch.core.ports.in.Product.GetProductUseCase;
@@ -56,7 +57,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public OrderServiceFacade orderServiceFacade(CreateOrderUseCase createOrderUseCase, GetOrderUseCase getOrderUseCase, GetAllOrdersUseCase getAllOrdersUseCase, CustomerRepositoryPort customerRepositoryPort, ProductRepositoryPort productRepositoryPort) {
-        return new OrderServiceFacade(createOrderUseCase, getOrderUseCase, getAllOrdersUseCase, customerRepositoryPort, productRepositoryPort);
+    public OrderServiceFacade orderServiceFacade(CreateOrderUseCase createOrderUseCase, GetOrderUseCase getOrderUseCase, GetAllOrdersUseCase getAllOrdersUseCase, UpdateOrderStatusUseCase updateOrderStatusUseCase, CustomerRepositoryPort customerRepositoryPort, ProductRepositoryPort productRepositoryPort) {
+        return new OrderServiceFacade(createOrderUseCase, getOrderUseCase, getAllOrdersUseCase, updateOrderStatusUseCase, customerRepositoryPort, productRepositoryPort);
     }
 }
