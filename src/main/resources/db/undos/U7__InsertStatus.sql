@@ -1,0 +1,1 @@
+DELETE FROM order_status_entity WHERE status IN ('RECEBIDO', 'EM_PREPARACAO', 'PRONTO', 'FINALIZADO');
