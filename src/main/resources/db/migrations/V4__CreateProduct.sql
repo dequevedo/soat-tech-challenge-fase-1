@@ -3,5 +3,5 @@ CREATE TABLE product_entity (
     name VARCHAR(255),
     description TEXT,
     price NUMERIC(10, 2),
-    category VARCHAR(50)
+    category_id BIGINT REFERENCES category_entity(id)
 );
