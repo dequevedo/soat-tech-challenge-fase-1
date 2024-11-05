@@ -15,23 +15,6 @@ public class CreateOrderRequest {
     private Long customerId;
 
     @NotNull(message = "productIds must not be null")
-    private ProductIds productIds;
+    private List<Long> productIds;
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class ProductIds {
-
-        @NotNull(message = "snack must not be null")
-        private List<Long> snack;
-
-        @NotNull(message = "side must not be null")
-        private List<Long> side;
-
-        @NotNull(message = "drink must not be null")
-        private List<Long> drink;
-
-        @NotNull(message = "dessert must not be null")
-        private List<Long> dessert;
-    }
 }

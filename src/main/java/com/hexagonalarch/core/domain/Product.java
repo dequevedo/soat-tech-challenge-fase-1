@@ -1,7 +1,5 @@
 package com.hexagonalarch.core.domain;
 
-import com.hexagonalarch.core.domain.enumeration.ProductCategory;
-
 public class Product {
 
     private Long id;
@@ -15,6 +13,10 @@ public class Product {
     private ProductCategory category;
 
     public Product() {
+    }
+
+    public Product(Long id) {
+        this.id = id;
     }
 
     public Product(Long id, String name, String description, Double price, ProductCategory category) {
@@ -64,4 +66,6 @@ public class Product {
     public void setCategory(ProductCategory category) {
         this.category = category;
     }
+
+
 }

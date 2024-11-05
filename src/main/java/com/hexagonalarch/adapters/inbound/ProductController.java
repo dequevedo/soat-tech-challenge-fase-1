@@ -1,6 +1,7 @@
 package com.hexagonalarch.adapters.inbound;
 
 import com.hexagonalarch.adapters.converters.GenericConverter;
+import com.hexagonalarch.adapters.converters.ProductConverter;
 import com.hexagonalarch.adapters.dto.request.CreateProductRequest;
 import com.hexagonalarch.adapters.dto.response.CreateProductResponse;
 import com.hexagonalarch.adapters.dto.response.GetProductResponse;
@@ -22,12 +23,15 @@ public class ProductController {
 
     private final ProductServiceFacade productServiceFacade;
     private final GenericConverter genericConverter;
+    private final ProductConverter productConverter;
 
     @PostMapping("/products")
     @ResponseStatus(HttpStatus.CREATED)
     public CreateProductResponse createProduct(@Valid @RequestBody CreateProductRequest productRequest) {
-        Product productInput = genericConverter.toDomain(productRequest, Product.class);
+        Product productInput = productConverter.toDomain(productRequest);
+
         Product newProduct = productServiceFacade.createProduct(productInput);
+
         return genericConverter.toDto(newProduct, CreateProductResponse.class);
     }
 

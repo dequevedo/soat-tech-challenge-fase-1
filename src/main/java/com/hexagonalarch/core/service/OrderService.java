@@ -1,6 +1,8 @@
 package com.hexagonalarch.core.service;
 
+import com.hexagonalarch.core.domain.Customer;
 import com.hexagonalarch.core.domain.Order;
+import com.hexagonalarch.core.domain.Product;
 import com.hexagonalarch.core.domain.enumeration.OrderStatus;
 import com.hexagonalarch.core.ports.in.Order.CreateOrderUseCase;
 import com.hexagonalarch.core.ports.in.Order.GetAllOrdersUseCase;
@@ -29,22 +31,17 @@ public class OrderService implements CreateOrderUseCase, GetOrderUseCase, GetAll
 
     @Override
     public Order createOrder(Order order) {
-        customerRepository.findById(order.getCustomerId())
-                .orElseThrow(() -> new NotFoundException("Customer not found"));
+        Customer customer = customerRepository.findById(order.getCustomerId())
+                .orElseThrow(() -> new NotFoundException("Cliente não encontrado"));
+        order.setCustomerId(customer.getId());
 
-        order.getSnacks().forEach(snack -> productRepository.findById(snack.getId())
-                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + snack.getId())));
+        List<Product> products = order.getProducts().stream()
+                .map(product -> productRepository.findById(product.getId())
+                        .orElseThrow(() -> new NotFoundException("Product not found for ID: " + product.getId())))
+                .toList();
+        order.setProducts(products);
 
-        order.getSides().forEach(side -> productRepository.findById(side.getId())
-                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + side.getId())));
-
-        order.getDrinks().forEach(drink -> productRepository.findById(drink.getId())
-                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + drink.getId())));
-
-        order.getDesserts().forEach(dessert -> productRepository.findById(dessert.getId())
-                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + dessert.getId())));
-
-        order.setStatus(OrderStatus.RECEBIDO);
+        order.setStatus(OrderStatus.INICIADO);
 
         OrderValidationFactory.getValidatorsForCreateOrder().validate(order);
 

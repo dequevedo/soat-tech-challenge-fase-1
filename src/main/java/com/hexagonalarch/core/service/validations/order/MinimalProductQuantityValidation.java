@@ -9,18 +9,11 @@ public class MinimalProductQuantityValidation implements Validator<Order> {
 
     @Override
     public ValidationResult validate(Order order) {
-        if (!hasAtLeastOneProduct(order)) {
-            throw new BusinessException("Order must contain at least one product from any category: snacks, sides, drinks, or desserts.");
+        if (order.getProducts().isEmpty()) {
+            throw new BusinessException("Pedido deve conter pelo menos um produto");
         }
 
-        return new ValidationResult(true, "Order contains at least one product.");
-    }
-
-    private boolean hasAtLeastOneProduct(Order order) {
-        return (order.getSnacks() != null && !order.getSnacks().isEmpty()) ||
-                (order.getSides() != null && !order.getSides().isEmpty()) ||
-                (order.getDrinks() != null && !order.getDrinks().isEmpty()) ||
-                (order.getDesserts() != null && !order.getDesserts().isEmpty());
+        return new ValidationResult(true, null);
     }
 }
 

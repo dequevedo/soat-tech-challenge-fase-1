@@ -18,12 +18,6 @@ public class CreateOrderResponse {
 
     private OrderStatus status;
 
-    private List<CreateOrderProductResponse> snacks;
-
-    private List<CreateOrderProductResponse> sides;
-
-    private List<CreateOrderProductResponse> drinks;
-
-    private List<CreateOrderProductResponse> desserts;
+    private List<CreateProductResponse> products;
 
 }

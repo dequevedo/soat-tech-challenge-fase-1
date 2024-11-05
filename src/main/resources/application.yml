@@ -25,6 +25,7 @@ spring:
       mode: always
 
   flyway:
+    enabled: false
     locations: classpath:db/migrations
     undo-locations: classpath:db/undos
 

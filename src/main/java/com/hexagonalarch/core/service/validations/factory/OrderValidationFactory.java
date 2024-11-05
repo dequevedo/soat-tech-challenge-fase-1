@@ -4,7 +4,6 @@ import com.hexagonalarch.core.domain.Order;
 import com.hexagonalarch.core.service.validations.CompositeValidator;
 import com.hexagonalarch.core.service.validations.Validator;
 import com.hexagonalarch.core.service.validations.order.MinimalProductQuantityValidation;
-import com.hexagonalarch.core.service.validations.order.ProductsCategoriesValidation;
 
 import java.util.List;
 
@@ -12,7 +11,6 @@ public class OrderValidationFactory {
 
     public static Validator<Order> getValidatorsForCreateOrder() {
         return new CompositeValidator<>(List.of(
-                new ProductsCategoriesValidation(),
                 new MinimalProductQuantityValidation()
         ));
     }

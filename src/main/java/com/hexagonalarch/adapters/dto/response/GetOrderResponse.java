@@ -15,12 +15,6 @@ public class GetOrderResponse {
 
     private String status;
 
-    private List<CreateOrderProductResponse> snacks;
-
-    private List<CreateOrderProductResponse> sides;
-
-    private List<CreateOrderProductResponse> drinks;
-
-    private List<CreateOrderProductResponse> desserts;
+    private List<CreateOrderProductResponse> products;
 
 }

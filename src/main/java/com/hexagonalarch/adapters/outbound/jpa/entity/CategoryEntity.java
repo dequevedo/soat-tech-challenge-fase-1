@@ -1,5 +1,4 @@
 package com.hexagonalarch.adapters.outbound.jpa.entity;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,20 +10,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductEntity {
+public class CategoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String name;
-
-    private String description;
-
-    private Double price;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "category_id")
-    private CategoryEntity category;
-
 }
