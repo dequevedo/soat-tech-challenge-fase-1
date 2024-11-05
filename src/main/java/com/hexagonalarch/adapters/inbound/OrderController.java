@@ -28,7 +28,8 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CreateOrderResponse createOrder(@Valid @RequestBody CreateOrderRequest createOrderRequest) {
-        Order newOrder = orderServiceFacade.createOrder(createOrderRequest);
+        Order order = orderConverter.toDomain(createOrderRequest);
+        Order newOrder = orderServiceFacade.createOrder(order);
         return genericConverter.toDto(newOrder, CreateOrderResponse.class);
     }
 

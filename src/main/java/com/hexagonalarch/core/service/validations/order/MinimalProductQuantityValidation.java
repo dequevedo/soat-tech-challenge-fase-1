@@ -10,10 +10,10 @@ public class MinimalProductQuantityValidation implements Validator<Order> {
     @Override
     public ValidationResult validate(Order order) {
         if (order.getProducts().isEmpty()) {
-            throw new BusinessException("Order must contain at least one product.");
+            throw new BusinessException("Pedido deve conter pelo menos um produto");
         }
 
-        return new ValidationResult(true, "Order contains at least one product.");
+        return new ValidationResult(true, null);
     }
 }
 

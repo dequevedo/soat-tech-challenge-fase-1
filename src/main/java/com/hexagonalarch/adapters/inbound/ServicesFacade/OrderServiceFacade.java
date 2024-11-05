@@ -42,17 +42,7 @@ public class OrderServiceFacade {
     }
 
 
-    public Order createOrder(CreateOrderRequest createOrderRequest) {
-        Customer customer = customerRepository.findById(createOrderRequest.getCustomerId())
-                .orElseThrow(() -> new NotFoundException("Customer not found"));
-
-        List<Product> products = createOrderRequest.getProductIds().stream()
-                .map(id -> productRepository.findById(id)
-                        .orElseThrow(() -> new NotFoundException("Product not found for ID: " + id)))
-                .toList();
-
-        Order order = new Order(null, customer.getId(), OrderStatus.RECEBIDO, products);
-
+    public Order createOrder(Order order) {
         return createOrderUseCase.createOrder(order);
     }
 

@@ -24,12 +24,9 @@ public class JpaOrderRepositoryAdapter implements OrderRepositoryPort {
     @Override
     public Order save(Order order) {
         OrderEntity orderEntity = modelMapper.map(order, OrderEntity.class);
+        OrderStatusEntity status = jpaOrderStatusRepository.findByStatus(order.getStatus()).orElseThrow(() -> new IllegalArgumentException("Esse status não existe"));
 
-        OrderStatusEntity statusEntity = jpaOrderStatusRepository.findByStatus(order.getStatus())
-                .orElseThrow(() -> new IllegalArgumentException("Status não encontrado"));
-
-        orderEntity.setStatus(statusEntity);
-
+        orderEntity.setStatus(status);
         OrderEntity savedOrderEntity = jpaRepository.save(orderEntity);
 
         return modelMapper.map(savedOrderEntity, Order.class);

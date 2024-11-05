@@ -18,6 +18,6 @@ public class CreateOrderResponse {
 
     private OrderStatus status;
 
-    private List<CreateOrderProductResponse> products;
+    private List<CreateProductResponse> products;
 
 }
