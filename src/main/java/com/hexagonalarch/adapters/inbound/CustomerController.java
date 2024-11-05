@@ -6,6 +6,7 @@ import com.hexagonalarch.adapters.dto.response.CreateCustomerResponse;
 import com.hexagonalarch.adapters.dto.response.GetCustomerResponse;
 import com.hexagonalarch.adapters.inbound.ServicesFacade.CustomerServiceFacade;
 import com.hexagonalarch.core.domain.Customer;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Customers", description = "Operations related to Customers")
 public class CustomerController {
 
     private final CustomerServiceFacade customerServiceFacade;
