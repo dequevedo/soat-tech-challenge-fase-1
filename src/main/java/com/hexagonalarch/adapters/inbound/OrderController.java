@@ -1,6 +1,7 @@
 package com.hexagonalarch.adapters.inbound;
 
 import com.hexagonalarch.adapters.converters.GenericConverter;
+import com.hexagonalarch.adapters.converters.OrderConverter;
 import com.hexagonalarch.adapters.dto.request.CreateOrderRequest;
 import com.hexagonalarch.adapters.dto.request.UpdateOrderStatusRequest;
 import com.hexagonalarch.adapters.dto.response.CreateOrderResponse;
@@ -24,6 +25,7 @@ public class OrderController {
 
     private final OrderServiceFacade orderServiceFacade;
     private final GenericConverter genericConverter;
+    private final OrderConverter orderConverter;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
