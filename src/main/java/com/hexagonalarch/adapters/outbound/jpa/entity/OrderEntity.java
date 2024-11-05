@@ -1,6 +1,5 @@
 package com.hexagonalarch.adapters.outbound.jpa.entity;
 
-import com.hexagonalarch.core.domain.enumeration.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,8 +22,9 @@ public class OrderEntity {
     @ManyToOne
     private CustomerEntity customer;
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
+    private OrderStatusEntity status;
 
     @ManyToMany
     @JoinTable(

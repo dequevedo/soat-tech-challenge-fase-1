@@ -1,15 +1,14 @@
 package com.hexagonalarch.adapters.outbound.jpa;
 
-import com.hexagonalarch.adapters.outbound.jpa.entity.OrderEntity;
 import com.hexagonalarch.adapters.outbound.jpa.entity.OrderStatusEntity;
+import com.hexagonalarch.core.domain.enumeration.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface JpaOrderRepository extends JpaRepository<OrderEntity, Long> {
+public interface JpaOrderStatusRepository extends JpaRepository<OrderStatusEntity, Long> {
 
-    List<OrderEntity> findAllByStatus(OrderStatusEntity orderStatusEntity);
-
+    Optional<OrderStatusEntity> findByStatus(OrderStatus status);
 }

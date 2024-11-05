@@ -1,6 +1,7 @@
 package com.hexagonalarch.adapters.outbound.jpa;
 
 import com.hexagonalarch.adapters.outbound.jpa.entity.OrderEntity;
+import com.hexagonalarch.adapters.outbound.jpa.entity.OrderStatusEntity;
 import com.hexagonalarch.core.domain.Order;
 import com.hexagonalarch.core.domain.enumeration.OrderStatus;
 import com.hexagonalarch.core.ports.out.OrderRepositoryPort;
@@ -17,27 +18,21 @@ import java.util.stream.Collectors;
 public class JpaOrderRepositoryAdapter implements OrderRepositoryPort {
 
     private final JpaOrderRepository jpaRepository;
+    private final JpaOrderStatusRepository jpaOrderStatusRepository;
     private final ModelMapper modelMapper;
 
     @Override
     public Order save(Order order) {
-        //TODO
-//        modelMapper.typeMap(Order.class, OrderEntity.class).addMappings(mapper -> {
-//            mapper.map(Order::getSnacks, OrderEntity::setSnacks);
-//            mapper.map(Order::getSides, OrderEntity::setSides);
-//            mapper.map(Order::getDrinks, OrderEntity::setDrinks);
-//            mapper.map(Order::getDesserts, OrderEntity::setDesserts);
-//        });
-//
-//        modelMapper.typeMap(OrderEntity.class, Order.class).addMappings(mapper -> {
-//            mapper.map(OrderEntity::getSnacks, Order::setSnacks);
-//            mapper.map(OrderEntity::getSides, Order::setSides);
-//            mapper.map(OrderEntity::getDrinks, Order::setDrinks);
-//            mapper.map(OrderEntity::getDesserts, Order::setDesserts);
-//        });
+        OrderEntity orderEntity = modelMapper.map(order, OrderEntity.class);
 
-        OrderEntity orderEntity = jpaRepository.save(modelMapper.map(order, OrderEntity.class));
-        return modelMapper.map(orderEntity, Order.class);
+        OrderStatusEntity statusEntity = jpaOrderStatusRepository.findByStatus(order.getStatus())
+                .orElseThrow(() -> new IllegalArgumentException("Status não encontrado"));
+
+        orderEntity.setStatus(statusEntity);
+
+        OrderEntity savedOrderEntity = jpaRepository.save(orderEntity);
+
+        return modelMapper.map(savedOrderEntity, Order.class);
     }
 
     @Override
@@ -48,7 +43,16 @@ public class JpaOrderRepositoryAdapter implements OrderRepositoryPort {
 
     @Override
     public List<Order> findAll(OrderStatus orderStatus) {
-        List<OrderEntity> orderEntities = (orderStatus == null) ? jpaRepository.findAll() : jpaRepository.findAllByStatus(orderStatus);
+        List<OrderEntity> orderEntities;
+        if (orderStatus == null) {
+            orderEntities = jpaRepository.findAll();
+        } else {
+            OrderStatusEntity statusEntity = jpaOrderStatusRepository.findByStatus(orderStatus)
+                    .orElseThrow(() -> new IllegalArgumentException("Status não encontrado"));
+
+            orderEntities = jpaRepository.findAllByStatus(statusEntity);
+        }
+
         return orderEntities.stream()
                 .map(orderEntity -> modelMapper.map(orderEntity, Order.class))
                 .collect(Collectors.toList());
