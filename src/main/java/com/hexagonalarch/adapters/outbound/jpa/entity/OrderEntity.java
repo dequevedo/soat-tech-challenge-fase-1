@@ -23,18 +23,41 @@ public class OrderEntity {
     @ManyToOne
     private CustomerEntity customer;
 
-    @OneToMany
-    private List<ProductEntity> products;
-
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    private Double totalPrice;
+    @ManyToMany
+    @JoinTable(
+            name = "order_entity_snack",
+            joinColumns = @JoinColumn(name = "order_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "snack_id")
+    )
+    private List<ProductEntity> snacks;
 
-    public Double getTotalPrice() {
-        return products.stream()
-                .mapToDouble(ProductEntity::getPrice)
-                .sum();
-    }
+    @ManyToMany
+    @JoinTable(
+            name = "order_entity_side",
+            joinColumns = @JoinColumn(name = "order_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "side_id")
+    )
+    private List<ProductEntity> sides;
+
+    @ManyToMany
+    @JoinTable(
+            name = "order_entity_drink",
+            joinColumns = @JoinColumn(name = "order_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "drink_id")
+    )
+    private List<ProductEntity> drinks;
+
+    @ManyToMany
+    @JoinTable(
+            name = "order_entity_dessert",
+            joinColumns = @JoinColumn(name = "order_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "dessert_id")
+    )
+    private List<ProductEntity> desserts;
+
+    private Double totalPrice;
 
 }
