@@ -32,17 +32,8 @@ public class OrderService implements CreateOrderUseCase, GetOrderUseCase, GetAll
         customerRepository.findById(order.getCustomerId())
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
 
-        order.getSnacks().forEach(snack -> productRepository.findById(snack.getId())
-                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + snack.getId())));
-
-        order.getSides().forEach(side -> productRepository.findById(side.getId())
-                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + side.getId())));
-
-        order.getDrinks().forEach(drink -> productRepository.findById(drink.getId())
-                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + drink.getId())));
-
-        order.getDesserts().forEach(dessert -> productRepository.findById(dessert.getId())
-                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + dessert.getId())));
+        order.getProducts().forEach(product -> productRepository.findById(product.getId())
+                .orElseThrow(() -> new NotFoundException("Product not found for ID: " + product.getId())));
 
         order.setStatus(OrderStatus.RECEBIDO);
 

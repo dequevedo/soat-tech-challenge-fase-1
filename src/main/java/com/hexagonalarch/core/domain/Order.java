@@ -11,26 +11,17 @@ public class Order {
     private Long customerId;
 
     private OrderStatus status;
-
-    private List<Product> snacks;
-
-    private List<Product> sides;
-
-    private List<Product> drinks;
-
-    private List<Product> desserts;
+    
+    private List<Product> products;
 
     public Order() {
     }
 
-    public Order(Long id, Long customerId, OrderStatus status, List<Product> snacks, List<Product> sides, List<Product> drinks, List<Product> desserts) {
+    public Order(Long id, Long customerId, OrderStatus status, List<Product> products) {
         this.id = id;
         this.customerId = customerId;
         this.status = status;
-        this.snacks = snacks;
-        this.sides = sides;
-        this.drinks = drinks;
-        this.desserts = desserts;
+        this.products = products;
     }
 
     public Long getId() {
@@ -57,44 +48,18 @@ public class Order {
         this.status = status;
     }
 
-    public List<Product> getSnacks() {
-        return snacks;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setSnacks(List<Product> snacks) {
-        this.snacks = snacks;
-    }
-
-    public List<Product> getSides() {
-        return sides;
-    }
-
-    public void setSides(List<Product> sides) {
-        this.sides = sides;
-    }
-
-    public List<Product> getDrinks() {
-        return drinks;
-    }
-
-    public void setDrinks(List<Product> drinks) {
-        this.drinks = drinks;
-    }
-
-    public List<Product> getDesserts() {
-        return desserts;
-    }
-
-    public void setDesserts(List<Product> desserts) {
-        this.desserts = desserts;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Double getTotalPrice() {
-        double total = 0.0;
-        if (snacks != null) total += snacks.stream().mapToDouble(Product::getPrice).sum();
-        if (sides != null) total += sides.stream().mapToDouble(Product::getPrice).sum();
-        if (drinks != null) total += drinks.stream().mapToDouble(Product::getPrice).sum();
-        if (desserts != null) total += desserts.stream().mapToDouble(Product::getPrice).sum();
-        return total;
+        if (products == null) {
+            return 0.0;
+        }
+        return products.stream().mapToDouble(Product::getPrice).sum();
     }
 }

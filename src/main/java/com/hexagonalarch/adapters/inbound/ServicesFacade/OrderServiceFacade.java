@@ -46,12 +46,12 @@ public class OrderServiceFacade {
         Customer customer = customerRepository.findById(createOrderRequest.getCustomerId())
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
 
-        List<Product> snacks = getProductsByIds(createOrderRequest.getProductIds().getSnack());
-        List<Product> sides = getProductsByIds(createOrderRequest.getProductIds().getSide());
-        List<Product> drinks = getProductsByIds(createOrderRequest.getProductIds().getDrink());
-        List<Product> desserts = getProductsByIds(createOrderRequest.getProductIds().getDessert());
+        List<Product> products = createOrderRequest.getProductIds().stream()
+                .map(id -> productRepository.findById(id)
+                        .orElseThrow(() -> new NotFoundException("Product not found for ID: " + id)))
+                .toList();
 
-        Order order = new Order(null, customer.getId(), OrderStatus.RECEBIDO, snacks, sides, drinks, desserts);
+        Order order = new Order(null, customer.getId(), OrderStatus.RECEBIDO, products);
 
         return createOrderUseCase.createOrder(order);
     }
@@ -68,10 +68,4 @@ public class OrderServiceFacade {
         updateOrderStatusUseCase.updateOrderStatus(id, status);
     }
 
-    private List<Product> getProductsByIds(List<Long> productIds) {
-        return productIds.stream()
-                .map(id -> productRepository.findById(id)
-                        .orElseThrow(() -> new NotFoundException("Product not found for ID: " + id)))
-                .toList();
-    }
 }

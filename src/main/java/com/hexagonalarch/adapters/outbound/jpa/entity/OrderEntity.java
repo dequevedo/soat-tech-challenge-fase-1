@@ -28,36 +28,11 @@ public class OrderEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "order_entity_snack",
+            name = "order_entity_product",
             joinColumns = @JoinColumn(name = "order_entity_id"),
-            inverseJoinColumns = @JoinColumn(name = "snack_id")
+            inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<ProductEntity> snacks;
-
-    @ManyToMany
-    @JoinTable(
-            name = "order_entity_side",
-            joinColumns = @JoinColumn(name = "order_entity_id"),
-            inverseJoinColumns = @JoinColumn(name = "side_id")
-    )
-    private List<ProductEntity> sides;
-
-    @ManyToMany
-    @JoinTable(
-            name = "order_entity_drink",
-            joinColumns = @JoinColumn(name = "order_entity_id"),
-            inverseJoinColumns = @JoinColumn(name = "drink_id")
-    )
-    private List<ProductEntity> drinks;
-
-    @ManyToMany
-    @JoinTable(
-            name = "order_entity_dessert",
-            joinColumns = @JoinColumn(name = "order_entity_id"),
-            inverseJoinColumns = @JoinColumn(name = "dessert_id")
-    )
-    private List<ProductEntity> desserts;
+    private List<ProductEntity> products;
 
     private Double totalPrice;
-
 }

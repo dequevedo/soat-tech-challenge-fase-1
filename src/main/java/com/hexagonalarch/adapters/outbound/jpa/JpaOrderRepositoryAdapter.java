@@ -21,19 +21,20 @@ public class JpaOrderRepositoryAdapter implements OrderRepositoryPort {
 
     @Override
     public Order save(Order order) {
-        modelMapper.typeMap(Order.class, OrderEntity.class).addMappings(mapper -> {
-            mapper.map(Order::getSnacks, OrderEntity::setSnacks);
-            mapper.map(Order::getSides, OrderEntity::setSides);
-            mapper.map(Order::getDrinks, OrderEntity::setDrinks);
-            mapper.map(Order::getDesserts, OrderEntity::setDesserts);
-        });
-
-        modelMapper.typeMap(OrderEntity.class, Order.class).addMappings(mapper -> {
-            mapper.map(OrderEntity::getSnacks, Order::setSnacks);
-            mapper.map(OrderEntity::getSides, Order::setSides);
-            mapper.map(OrderEntity::getDrinks, Order::setDrinks);
-            mapper.map(OrderEntity::getDesserts, Order::setDesserts);
-        });
+        //TODO
+//        modelMapper.typeMap(Order.class, OrderEntity.class).addMappings(mapper -> {
+//            mapper.map(Order::getSnacks, OrderEntity::setSnacks);
+//            mapper.map(Order::getSides, OrderEntity::setSides);
+//            mapper.map(Order::getDrinks, OrderEntity::setDrinks);
+//            mapper.map(Order::getDesserts, OrderEntity::setDesserts);
+//        });
+//
+//        modelMapper.typeMap(OrderEntity.class, Order.class).addMappings(mapper -> {
+//            mapper.map(OrderEntity::getSnacks, Order::setSnacks);
+//            mapper.map(OrderEntity::getSides, Order::setSides);
+//            mapper.map(OrderEntity::getDrinks, Order::setDrinks);
+//            mapper.map(OrderEntity::getDesserts, Order::setDesserts);
+//        });
 
         OrderEntity orderEntity = jpaRepository.save(modelMapper.map(order, OrderEntity.class));
         return modelMapper.map(orderEntity, Order.class);
