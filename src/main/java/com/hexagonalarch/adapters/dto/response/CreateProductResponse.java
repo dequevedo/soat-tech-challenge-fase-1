@@ -1,7 +1,5 @@
 package com.hexagonalarch.adapters.dto.response;
 
-import com.hexagonalarch.core.domain.Product;
-import com.hexagonalarch.core.domain.ProductCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +19,6 @@ public class CreateProductResponse {
 
     private String description;
 
-    private ProductCategory category;
+    private String category;
 
 }

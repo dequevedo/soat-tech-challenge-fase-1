@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "order_status")
 public class OrderStatusEntity {
 
     @Id
