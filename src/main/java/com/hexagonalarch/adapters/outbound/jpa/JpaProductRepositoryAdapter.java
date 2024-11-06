@@ -3,8 +3,8 @@ package com.hexagonalarch.adapters.outbound.jpa;
 import com.hexagonalarch.adapters.converters.ProductConverter;
 import com.hexagonalarch.adapters.outbound.jpa.entity.CategoryEntity;
 import com.hexagonalarch.adapters.outbound.jpa.entity.ProductEntity;
-import com.hexagonalarch.core.ports.out.ProductRepositoryPort;
 import com.hexagonalarch.core.domain.Product;
+import com.hexagonalarch.core.ports.out.ProductRepositoryPort;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -20,6 +20,7 @@ public class JpaProductRepositoryAdapter implements ProductRepositoryPort {
     private final ModelMapper modelMapper;
     private final JpaCategoryRepository jpaCategoryRepository;
     private final ProductConverter productConverter;
+
     @Override
     public Product save(Product product) {
         CategoryEntity categoryEntity = jpaCategoryRepository.findByName(product.getCategory().getValue())
@@ -30,7 +31,8 @@ public class JpaProductRepositoryAdapter implements ProductRepositoryPort {
         productEntity.setCategory(categoryEntity);
 
         ProductEntity savedProductEntity = jpaRepository.save(productEntity);
-        return modelMapper.map(savedProductEntity, Product.class);
+
+        return productConverter.entityToDomain(savedProductEntity);
     }
 
     @Override
