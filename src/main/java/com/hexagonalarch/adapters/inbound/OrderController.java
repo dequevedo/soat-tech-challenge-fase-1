@@ -56,4 +56,11 @@ public class OrderController {
     public void updateOrderStatus(@PathVariable Long id, @RequestBody UpdateOrderStatusRequest updateOrderStatusRequest) {
         orderServiceFacade.updateOrderStatus(id, updateOrderStatusRequest.getStatus());
     }
+
+    @PatchMapping("/{id}/checkout")
+    @ResponseStatus(HttpStatus.OK)
+    public GetOrderResponse checkout(@PathVariable Long id) {
+        Order checkout = orderServiceFacade.checkout(id);
+        return genericConverter.toDto(checkout, GetOrderResponse.class);
+    }
 }
