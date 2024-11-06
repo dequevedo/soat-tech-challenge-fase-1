@@ -1,7 +1,7 @@
 package com.hexagonalarch.core.domain;
 
 public class Customer {
-
+    //Modificar CPF para ser um object value
     private Long id;
     private String name;
     private String email;
