@@ -1,5 +1,5 @@
 CREATE TABLE product_entity (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255),
     description TEXT,
     price NUMERIC(10, 2),
