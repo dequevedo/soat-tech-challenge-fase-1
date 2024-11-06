@@ -19,4 +19,6 @@ public class CreateOrderProductResponse {
 
     private BigDecimal price;
 
+    private String category;
+
 }
