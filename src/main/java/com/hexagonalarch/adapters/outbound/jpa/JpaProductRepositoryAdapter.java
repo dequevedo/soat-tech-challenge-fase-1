@@ -44,7 +44,7 @@ public class JpaProductRepositoryAdapter implements ProductRepositoryPort {
     @Override
     public List<Product> findAll() {
         return jpaRepository.findAll().stream()
-                .map(productEntity -> modelMapper.map(productEntity, Product.class))
+                .map(productConverter::entityToDomain)
                 .toList();
     }
 }
