@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poc-hexagonal-arch
+  labels:
+    app: poc-hexagonal-arch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: poc-hexagonal-arch
+  template:
+    metadata:
+      labels:
+        app: poc-hexagonal-arch
+    spec:
+      containers:
+        - name: poc-hexagonal-arch
+          image: tech-challenge-fase-1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://db-service:5432/postgres
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: changeme

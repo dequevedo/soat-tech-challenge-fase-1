@@ -11,11 +11,37 @@
 4. Kubernetes
 5. (Optional) Beekeeper Studio or DBeaver
 
-### How to run this project using Dockerfile and Docker Compose
+### How to run this project using Docker and Kubernetes
 
 1. (Windows only) Make sure you are inside WSL terminal
-2. In the same folder as the Dockerfile, run the command: ```docker build -t tech-challenge-fase-1 .```
-3. Run the command: ```docker compose up -d```
+2. In the same folder as the Dockerfile, run the command: 
+```sh
+docker build -t tech-challenge-fase-1 .
+```
+```sh
+kubectl apply -f k8s/app/app-configmap.yaml
+kubectl apply -f k8s/app/app-deployment.yaml
+kubectl apply -f k8s/app/app-service.yaml
+```
+```sh
+kubectl rollout restart deployment poc-hexagonal-arch
+```
+```sh
+kubectl apply -f k8s/db/db-configmap.yaml
+kubectl apply -f k8s/db/db-pv.yaml
+kubectl apply -f k8s/db/db-pvc.yaml
+kubectl apply -f k8s/db/db-deployment.yaml
+kubectl apply -f k8s/db/db-service.yaml
+```
+```sh
+kubectl get pods
+```
+```sh
+kubectl get deployments
+```
+```sh
+kubectl get services
+```
 4. List all containers with ```docker ps``` and make sure these 3 are up and running: poc-hexagonal-container,
    pgadmin_container, postgres_container
 5. Enjoy! API should be accessible on localhost:8080
@@ -63,3 +89,10 @@ Flyway allows you to reverse applied migrations using the `undo` command. How to
 2. **Run Undo:**
    ```bash
    flyway undo
+
+### Debug pod
+kubectl apply -f k8s/debug-pod.yaml
+
+kubectl exec -it debug-pod sh
+
+nslookup db-service
