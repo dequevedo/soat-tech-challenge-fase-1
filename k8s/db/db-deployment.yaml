@@ -29,6 +29,11 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: db-storage
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 5
+            periodSeconds: 5
       volumes:
         - name: db-storage
           persistentVolumeClaim:

@@ -115,8 +115,14 @@ Flyway allows you to reverse applied migrations using the `undo` command. How to
 
 ### Debug pod
 
+```sh
 kubectl apply -f k8s/debug-pod.yaml
+```
 
+```sh
 kubectl exec -it debug-pod sh
+```
 
+```sh
 nslookup db-service
+```

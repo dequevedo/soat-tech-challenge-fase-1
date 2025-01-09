@@ -5,5 +5,7 @@ metadata:
 spec:
   containers:
     - name: debug-container
-      image: busybox
-      command: ["sh", "-c", "sleep 3600"]
+      image: alpine:latest
+      command: [ "sh", "-c", "sleep 3600" ]
+      stdin: true
+      tty: true
