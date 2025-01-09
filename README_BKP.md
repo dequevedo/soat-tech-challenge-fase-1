@@ -22,6 +22,7 @@ docker build -t tech-challenge-fase-1 .
 ### Apply all Application K8s Manifests
 
 ```sh
+kubectl apply -f k8s/app/app-hpa.yaml
 kubectl apply -f k8s/app/app-configmap.yaml
 kubectl apply -f k8s/app/app-deployment.yaml
 kubectl apply -f k8s/app/app-service.yaml
@@ -125,4 +126,12 @@ kubectl exec -it debug-pod sh
 
 ```sh
 nslookup db-service
+```
+
+### Install Kubernetes Metrics Server
+
+Metrics server is needed in order to Horizontal Pod (HPA) Autoscaling to work properly
+
+```sh
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
