@@ -20,13 +20,9 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
-          env:
-            - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://db-service:5432/postgres
-            - name: SPRING_DATASOURCE_USERNAME
-              value: postgres
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: changeme
+          envFrom:
+            - configMapRef:
+                name: poc-hexagonal-arch-config
           resources:
             requests:
               cpu: "100m"

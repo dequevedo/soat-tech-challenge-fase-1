@@ -4,3 +4,6 @@ metadata:
   name: poc-hexagonal-arch-config
 data:
   JAVA_OPTS: ""
+  SPRING_DATASOURCE_URL: jdbc:postgresql://db-service:5432/postgres
+  SPRING_DATASOURCE_USERNAME: postgres
+  SPRING_DATASOURCE_PASSWORD: changeme

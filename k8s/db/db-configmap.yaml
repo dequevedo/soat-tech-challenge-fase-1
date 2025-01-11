@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: db-configmap
 data:
-  DB_NAME: mydatabase
-  DB_USER: myuser
-  DB_PASSWORD: mypassword
+  POSTGRES_DB: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: changeme
