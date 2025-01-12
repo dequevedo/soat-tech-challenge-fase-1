@@ -58,6 +58,10 @@ watch -n 1 kubectl top pods
 kubectl delete all --all -n default
 ```
 
+```sh
+kubectl port-forward service/poc-hexagonal-arch 30080:8080
+```
+
 Enjoy! API should be accessible on localhost:30080
 
 ### Running Docker containers
