@@ -38,34 +38,24 @@ kubectl apply -f k8s/db/db-deployment.yaml
 kubectl apply -f k8s/db/db-service.yaml
 ```
 
-### Verify if all pods are running
-
-```sh
-kubectl get pods
-```
-
-### Verify if all deployments are running
-
-```sh
-kubectl get deployments
-```
-
-### Verify if all services are running
-
-```sh
-kubectl get services
-```
-
 ### Test the application
 
 ```sh
 curl -X GET "localhost:30080/customers"
 ```
 
-### Restart deployment in case of any mistake
+### Useful commands
 
 ```sh
 kubectl rollout restart deployment poc-hexagonal-arch
+```
+
+```sh
+watch -n 1 kubectl top pods
+```
+
+```sh
+kubectl delete all --all -n default
 ```
 
 Enjoy! API should be accessible on localhost:30080
