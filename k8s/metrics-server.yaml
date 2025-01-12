@@ -119,6 +119,7 @@ metadata:
   name: metrics-server
   namespace: kube-system
 spec:
+  replicas: 2
   selector:
     matchLabels:
       k8s-app: metrics-server
@@ -136,7 +137,8 @@ spec:
             - --secure-port=10250
             - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
             - --kubelet-use-node-status-port
-            - --metric-resolution=15s
+            - --metric-resolution=1s
+            - --kubelet-insecure-tls
           image: registry.k8s.io/metrics-server/metrics-server:v0.7.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -157,12 +159,15 @@ spec:
               path: /readyz
               port: https
               scheme: HTTPS
-            initialDelaySeconds: 20
-            periodSeconds: 10
+            initialDelaySeconds: 10
+            periodSeconds: 5
           resources:
             requests:
-              cpu: 100m
-              memory: 200Mi
+              cpu: 250m
+              memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
