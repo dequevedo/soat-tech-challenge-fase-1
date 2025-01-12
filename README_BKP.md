@@ -26,6 +26,7 @@ kubectl apply -f k8s/app/app-hpa.yaml
 kubectl apply -f k8s/app/app-configmap.yaml
 kubectl apply -f k8s/app/app-deployment.yaml
 kubectl apply -f k8s/app/app-service.yaml
+kubectl apply -f k8s/app/app-secret.yaml
 ```
 
 ### Apply all Databse K8s Manifests
@@ -36,6 +37,7 @@ kubectl apply -f k8s/db/db-pv.yaml
 kubectl apply -f k8s/db/db-pvc.yaml
 kubectl apply -f k8s/db/db-deployment.yaml
 kubectl apply -f k8s/db/db-service.yaml
+kubectl apply -f k8s/db/db-secret.yaml
 ```
 
 ### Test the application
