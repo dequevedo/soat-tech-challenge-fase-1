@@ -21,8 +21,8 @@ spec:
           ports:
             - containerPort: 8080
           envFrom:
-            - configMapRef:
-                name: poc-hexagonal-arch-config
+            - secretRef:
+                name: app-secret
           resources:
             requests:
               cpu: "500m"
